@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9B0046C22B8B928400EDAA8A /* ShowHistoryWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0046C12B8B928400EDAA8A /* ShowHistoryWeather.swift */; };
+		9B0046C42B8BC18B00EDAA8A /* GoLeftModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0046C32B8BC18B00EDAA8A /* GoLeftModifier.swift */; };
+		9B155CB12B8A39040082DA43 /* WeatherKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B155CB02B8A39040082DA43 /* WeatherKitManager.swift */; };
+		9B155CB32B8A3A2E0082DA43 /* CardinalDirections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B155CB22B8A3A2E0082DA43 /* CardinalDirections.swift */; };
+		9B155CB52B8A4C370082DA43 /* PastForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B155CB42B8A4C370082DA43 /* PastForecast.swift */; };
+		9B155CB72B8A4C870082DA43 /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B155CB62B8A4C870082DA43 /* Forecasts.swift */; };
+		9B1960EB2B76834000D55497 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1960EA2B76833F00D55497 /* HealthKit.framework */; };
+		9B4643242B751A6700833432 /* BigPolyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643232B751A6700833432 /* BigPolyApp.swift */; };
+		9B4643262B751A6700833432 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643252B751A6700833432 /* ContentView.swift */; };
+		9B4643282B751A6800833432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B4643272B751A6800833432 /* Assets.xcassets */; };
+		9B46432B2B751A6800833432 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B46432A2B751A6800833432 /* Preview Assets.xcassets */; };
+		9B4643372B751AE900833432 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643362B751AE900833432 /* Color+Ext.swift */; };
+		9B4643392B751C1D00833432 /* polyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643382B751C1D00833432 /* polyView.swift */; };
+		9B46433C2B751D5100833432 /* CityCoords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B46433B2B751D5100833432 /* CityCoords.swift */; };
+		9B46433E2B7522DE00833432 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B46433D2B7522DE00833432 /* LoadingView.swift */; };
+		9B4643402B75233000833432 /* fullMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B46433F2B75233000833432 /* fullMapView.swift */; };
+		9B4643422B75239B00833432 /* WorkoutCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643412B75239B00833432 /* WorkoutCore.swift */; };
+		9B4643442B7555C200833432 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643432B7555C200833432 /* ActivityType.swift */; };
+		9B4643462B758B8700833432 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4643452B758B8700833432 /* MapView.swift */; };
+		9B5269D82B77C40A00695BA6 /* IdentifiableCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269D72B77C40A00695BA6 /* IdentifiableCoordinate.swift */; };
+		9B5269DA2B77C92E00695BA6 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269D92B77C92E00695BA6 /* CustomMapView.swift */; };
+		9B5269DC2B77D8A800695BA6 /* CLLArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269DB2B77D8A800695BA6 /* CLLArrayExt.swift */; };
+		9B5269DE2B78091900695BA6 /* WorkoutRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269DD2B78091900695BA6 /* WorkoutRouteView.swift */; };
+		9B5269E02B781D6100695BA6 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269DF2B781D6100695BA6 /* LocationInfo.swift */; };
+		9B5269E22B789E2B00695BA6 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269E12B789E2B00695BA6 /* ViewExt.swift */; };
+		9B5269E42B791BE100695BA6 /* GradientPathRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269E32B791BE100695BA6 /* GradientPathRenderer.swift */; };
+		9B5269E62B7928C300695BA6 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269E52B7928C300695BA6 /* Address.swift */; };
+		9B5269EA2B7A8D6200695BA6 /* DELETETHIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269E92B7A8D6200695BA6 /* DELETETHIS.swift */; };
+		9B5269EC2B7AC1BF00695BA6 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269EB2B7AC1BF00695BA6 /* DateExt.swift */; };
+		9B5269EE2B7C027D00695BA6 /* WorkoutRouteEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269ED2B7C027D00695BA6 /* WorkoutRouteEXT.swift */; };
+		9B5269F02B7D1F2400695BA6 /* PaginatedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269EF2B7D1F2400695BA6 /* PaginatedWorkoutView.swift */; };
+		9B5269F22B7D201F00695BA6 /* HKActivityTypeEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F12B7D201F00695BA6 /* HKActivityTypeEXT.swift */; };
+		9B5269F42B7D28BE00695BA6 /* SortingFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F32B7D28BE00695BA6 /* SortingFilteringView.swift */; };
+		9B5269F62B7D2DF100695BA6 /* WorkoutMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F52B7D2DF100695BA6 /* WorkoutMetricsView.swift */; };
+		9B5269F82B7D351B00695BA6 /* fullMapMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F72B7D351B00695BA6 /* fullMapMetricsView.swift */; };
+		9BADEF292B814390009012F7 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADEF282B814390009012F7 /* WorkoutData.swift */; };
+		9BBBBC822B853AD500D78C5D /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC812B853AD500D78C5D /* DatePickerView.swift */; };
+		9BBBBC842B854FFB00D78C5D /* MapStyleSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC832B854FFB00D78C5D /* MapStyleSelectorView.swift */; };
+		9BBBBC862B85528D00D78C5D /* MapStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC852B85528D00D78C5D /* MapStyle.swift */; };
+		9BBBBC892B89542400D78C5D /* HistoricalWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC882B89542400D78C5D /* HistoricalWeather.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9B0046C12B8B928400EDAA8A /* ShowHistoryWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHistoryWeather.swift; sourceTree = "<group>"; };
+		9B0046C32B8BC18B00EDAA8A /* GoLeftModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoLeftModifier.swift; sourceTree = "<group>"; };
+		9B155CB02B8A39040082DA43 /* WeatherKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitManager.swift; sourceTree = "<group>"; };
+		9B155CB22B8A3A2E0082DA43 /* CardinalDirections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardinalDirections.swift; sourceTree = "<group>"; };
+		9B155CB42B8A4C370082DA43 /* PastForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastForecast.swift; sourceTree = "<group>"; };
+		9B155CB62B8A4C870082DA43 /* Forecasts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecasts.swift; sourceTree = "<group>"; };
+		9B1960EA2B76833F00D55497 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		9B1960EC2B7683FD00D55497 /* BigPoly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BigPoly.entitlements; sourceTree = "<group>"; };
+		9B1960ED2B76854100D55497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9B4643202B751A6700833432 /* BigPoly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigPoly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4643232B751A6700833432 /* BigPolyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigPolyApp.swift; sourceTree = "<group>"; };
+		9B4643252B751A6700833432 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9B4643272B751A6800833432 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9B46432A2B751A6800833432 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9B4643362B751AE900833432 /* Color+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		9B4643382B751C1D00833432 /* polyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polyView.swift; sourceTree = "<group>"; };
+		9B46433B2B751D5100833432 /* CityCoords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCoords.swift; sourceTree = "<group>"; };
+		9B46433D2B7522DE00833432 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		9B46433F2B75233000833432 /* fullMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fullMapView.swift; sourceTree = "<group>"; };
+		9B4643412B75239B00833432 /* WorkoutCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCore.swift; sourceTree = "<group>"; };
+		9B4643432B7555C200833432 /* ActivityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
+		9B4643452B758B8700833432 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9B5269D72B77C40A00695BA6 /* IdentifiableCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCoordinate.swift; sourceTree = "<group>"; };
+		9B5269D92B77C92E00695BA6 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
+		9B5269DB2B77D8A800695BA6 /* CLLArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLArrayExt.swift; sourceTree = "<group>"; };
+		9B5269DD2B78091900695BA6 /* WorkoutRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRouteView.swift; sourceTree = "<group>"; };
+		9B5269DF2B781D6100695BA6 /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
+		9B5269E12B789E2B00695BA6 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
+		9B5269E32B791BE100695BA6 /* GradientPathRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPathRenderer.swift; sourceTree = "<group>"; };
+		9B5269E52B7928C300695BA6 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		9B5269E92B7A8D6200695BA6 /* DELETETHIS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DELETETHIS.swift; sourceTree = "<group>"; };
+		9B5269EB2B7AC1BF00695BA6 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
+		9B5269ED2B7C027D00695BA6 /* WorkoutRouteEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRouteEXT.swift; sourceTree = "<group>"; };
+		9B5269EF2B7D1F2400695BA6 /* PaginatedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedWorkoutView.swift; sourceTree = "<group>"; };
+		9B5269F12B7D201F00695BA6 /* HKActivityTypeEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKActivityTypeEXT.swift; sourceTree = "<group>"; };
+		9B5269F32B7D28BE00695BA6 /* SortingFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingFilteringView.swift; sourceTree = "<group>"; };
+		9B5269F52B7D2DF100695BA6 /* WorkoutMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutMetricsView.swift; sourceTree = "<group>"; };
+		9B5269F72B7D351B00695BA6 /* fullMapMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fullMapMetricsView.swift; sourceTree = "<group>"; };
+		9BADEF282B814390009012F7 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
+		9BBBBC812B853AD500D78C5D /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		9BBBBC832B854FFB00D78C5D /* MapStyleSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleSelectorView.swift; sourceTree = "<group>"; };
+		9BBBBC852B85528D00D78C5D /* MapStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyle.swift; sourceTree = "<group>"; };
+		9BBBBC882B89542400D78C5D /* HistoricalWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalWeather.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9B46431D2B751A6700833432 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B1960EB2B76834000D55497 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9B1960E92B76833F00D55497 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B1960EA2B76833F00D55497 /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B4643172B751A6700833432 = {
+			isa = PBXGroup;
+			children = (
+				9B4643222B751A6700833432 /* BigPoly */,
+				9B4643212B751A6700833432 /* Products */,
+				9B1960E92B76833F00D55497 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9B4643212B751A6700833432 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9B4643202B751A6700833432 /* BigPoly.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9B4643222B751A6700833432 /* BigPoly */ = {
+			isa = PBXGroup;
+			children = (
+				9BBBBC872B89533C00D78C5D /* Structs */,
+				9B4643312B751A8400833432 /* App */,
+				9B4643272B751A6800833432 /* Assets.xcassets */,
+				9B1960EC2B7683FD00D55497 /* BigPoly.entitlements */,
+				9B4643232B751A6700833432 /* BigPolyApp.swift */,
+				9B4643332B751A9100833432 /* Classes */,
+				9B46433A2B751D4200833432 /* Data */,
+				9B4643342B751A9500833432 /* Enum */,
+				9B4643352B751AC400833432 /* Ext */,
+				9B1960ED2B76854100D55497 /* Info.plist */,
+				9B4643292B751A6800833432 /* Preview Content */,
+				9B4643322B751A8B00833432 /* Views */,
+			);
+			path = BigPoly;
+			sourceTree = "<group>";
+		};
+		9B4643292B751A6800833432 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9B46432A2B751A6800833432 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9B4643312B751A8400833432 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9B4643322B751A8B00833432 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9B4643252B751A6700833432 /* ContentView.swift */,
+				9B5269D92B77C92E00695BA6 /* CustomMapView.swift */,
+				9BBBBC812B853AD500D78C5D /* DatePickerView.swift */,
+				9B5269E92B7A8D6200695BA6 /* DELETETHIS.swift */,
+				9B5269F72B7D351B00695BA6 /* fullMapMetricsView.swift */,
+				9B46433F2B75233000833432 /* fullMapView.swift */,
+				9B46433D2B7522DE00833432 /* LoadingView.swift */,
+				9BBBBC832B854FFB00D78C5D /* MapStyleSelectorView.swift */,
+				9B4643452B758B8700833432 /* MapView.swift */,
+				9B5269EF2B7D1F2400695BA6 /* PaginatedWorkoutView.swift */,
+				9B4643382B751C1D00833432 /* polyView.swift */,
+				9B5269F32B7D28BE00695BA6 /* SortingFilteringView.swift */,
+				9B5269F52B7D2DF100695BA6 /* WorkoutMetricsView.swift */,
+				9B5269DD2B78091900695BA6 /* WorkoutRouteView.swift */,
+				9B0046C12B8B928400EDAA8A /* ShowHistoryWeather.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9B4643332B751A9100833432 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9B4643412B75239B00833432 /* WorkoutCore.swift */,
+				9B5269E32B791BE100695BA6 /* GradientPathRenderer.swift */,
+				9B155CB02B8A39040082DA43 /* WeatherKitManager.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		9B4643342B751A9500833432 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				9B4643432B7555C200833432 /* ActivityType.swift */,
+				9BBBBC852B85528D00D78C5D /* MapStyle.swift */,
+				9B155CB22B8A3A2E0082DA43 /* CardinalDirections.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		9B4643352B751AC400833432 /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				9B4643362B751AE900833432 /* Color+Ext.swift */,
+				9B5269DB2B77D8A800695BA6 /* CLLArrayExt.swift */,
+				9B5269E12B789E2B00695BA6 /* ViewExt.swift */,
+				9B5269EB2B7AC1BF00695BA6 /* DateExt.swift */,
+				9B5269ED2B7C027D00695BA6 /* WorkoutRouteEXT.swift */,
+				9B5269F12B7D201F00695BA6 /* HKActivityTypeEXT.swift */,
+				9B0046C32B8BC18B00EDAA8A /* GoLeftModifier.swift */,
+			);
+			path = Ext;
+			sourceTree = "<group>";
+		};
+		9B46433A2B751D4200833432 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9B155CB42B8A4C370082DA43 /* PastForecast.swift */,
+				9B155CB62B8A4C870082DA43 /* Forecasts.swift */,
+				9B46433B2B751D5100833432 /* CityCoords.swift */,
+				9B5269D72B77C40A00695BA6 /* IdentifiableCoordinate.swift */,
+				9B5269DF2B781D6100695BA6 /* LocationInfo.swift */,
+				9B5269E52B7928C300695BA6 /* Address.swift */,
+				9BADEF282B814390009012F7 /* WorkoutData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9BBBBC872B89533C00D78C5D /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				9BBBBC882B89542400D78C5D /* HistoricalWeather.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9B46431F2B751A6700833432 /* BigPoly */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B46432E2B751A6800833432 /* Build configuration list for PBXNativeTarget "BigPoly" */;
+			buildPhases = (
+				9B46431C2B751A6700833432 /* Sources */,
+				9B46431D2B751A6700833432 /* Frameworks */,
+				9B46431E2B751A6700833432 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BigPoly;
+			productName = BigPoly;
+			productReference = 9B4643202B751A6700833432 /* BigPoly.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9B4643182B751A6700833432 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					9B46431F2B751A6700833432 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 9B46431B2B751A6700833432 /* Build configuration list for PBXProject "BigPoly" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9B4643172B751A6700833432;
+			productRefGroup = 9B4643212B751A6700833432 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9B46431F2B751A6700833432 /* BigPoly */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9B46431E2B751A6700833432 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B46432B2B751A6800833432 /* Preview Assets.xcassets in Resources */,
+				9B4643282B751A6800833432 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9B46431C2B751A6700833432 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B5269E62B7928C300695BA6 /* Address.swift in Sources */,
+				9B4643392B751C1D00833432 /* polyView.swift in Sources */,
+				9B5269EC2B7AC1BF00695BA6 /* DateExt.swift in Sources */,
+				9B4643262B751A6700833432 /* ContentView.swift in Sources */,
+				9B5269E42B791BE100695BA6 /* GradientPathRenderer.swift in Sources */,
+				9B155CB12B8A39040082DA43 /* WeatherKitManager.swift in Sources */,
+				9B5269F22B7D201F00695BA6 /* HKActivityTypeEXT.swift in Sources */,
+				9B4643242B751A6700833432 /* BigPolyApp.swift in Sources */,
+				9B5269E02B781D6100695BA6 /* LocationInfo.swift in Sources */,
+				9B5269E22B789E2B00695BA6 /* ViewExt.swift in Sources */,
+				9B4643372B751AE900833432 /* Color+Ext.swift in Sources */,
+				9B5269F82B7D351B00695BA6 /* fullMapMetricsView.swift in Sources */,
+				9B4643402B75233000833432 /* fullMapView.swift in Sources */,
+				9B4643422B75239B00833432 /* WorkoutCore.swift in Sources */,
+				9B5269F02B7D1F2400695BA6 /* PaginatedWorkoutView.swift in Sources */,
+				9BADEF292B814390009012F7 /* WorkoutData.swift in Sources */,
+				9B0046C42B8BC18B00EDAA8A /* GoLeftModifier.swift in Sources */,
+				9B155CB72B8A4C870082DA43 /* Forecasts.swift in Sources */,
+				9BBBBC892B89542400D78C5D /* HistoricalWeather.swift in Sources */,
+				9B5269DA2B77C92E00695BA6 /* CustomMapView.swift in Sources */,
+				9B5269D82B77C40A00695BA6 /* IdentifiableCoordinate.swift in Sources */,
+				9B5269EE2B7C027D00695BA6 /* WorkoutRouteEXT.swift in Sources */,
+				9BBBBC822B853AD500D78C5D /* DatePickerView.swift in Sources */,
+				9B5269DE2B78091900695BA6 /* WorkoutRouteView.swift in Sources */,
+				9BBBBC842B854FFB00D78C5D /* MapStyleSelectorView.swift in Sources */,
+				9B46433C2B751D5100833432 /* CityCoords.swift in Sources */,
+				9B155CB52B8A4C370082DA43 /* PastForecast.swift in Sources */,
+				9B5269EA2B7A8D6200695BA6 /* DELETETHIS.swift in Sources */,
+				9B5269DC2B77D8A800695BA6 /* CLLArrayExt.swift in Sources */,
+				9BBBBC862B85528D00D78C5D /* MapStyle.swift in Sources */,
+				9B5269F42B7D28BE00695BA6 /* SortingFilteringView.swift in Sources */,
+				9B0046C22B8B928400EDAA8A /* ShowHistoryWeather.swift in Sources */,
+				9B4643462B758B8700833432 /* MapView.swift in Sources */,
+				9B4643442B7555C200833432 /* ActivityType.swift in Sources */,
+				9B5269F62B7D2DF100695BA6 /* WorkoutMetricsView.swift in Sources */,
+				9B46433E2B7522DE00833432 /* LoadingView.swift in Sources */,
+				9B155CB32B8A3A2E0082DA43 /* CardinalDirections.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9B46432C2B751A6800833432 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9B46432D2B751A6800833432 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9B46432F2B751A6800833432 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BigPoly/BigPoly.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BigPoly/Preview Content\"";
+				DEVELOPMENT_TEAM = KP3ZH5K2SY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BigPoly/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Need access to display route correctly on map";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Need access to display route correctly on map";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grantperry.BigPoly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9B4643302B751A6800833432 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BigPoly/BigPoly.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BigPoly/Preview Content\"";
+				DEVELOPMENT_TEAM = KP3ZH5K2SY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BigPoly/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Need access to display route correctly on map";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Need access to display route correctly on map";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grantperry.BigPoly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9B46431B2B751A6700833432 /* Build configuration list for PBXProject "BigPoly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B46432C2B751A6800833432 /* Debug */,
+				9B46432D2B751A6800833432 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B46432E2B751A6800833432 /* Build configuration list for PBXNativeTarget "BigPoly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B46432F2B751A6800833432 /* Debug */,
+				9B4643302B751A6800833432 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9B4643182B751A6700833432 /* Project object */;
+}
