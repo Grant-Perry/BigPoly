@@ -16,6 +16,7 @@ import HealthKit
 struct WorkoutRouteView: View {
 	//	@State var workout: HKWorkout
 	@State var workoutData: WorkoutData
+	@State private var workoutCore = WorkoutCore.shared
 	@State var address: Address? = nil
 	@State var thisWorkoutDistance: Double = 0
 	@State var date: Date = Date()
@@ -74,13 +75,10 @@ struct WorkoutRouteView: View {
 									Text("Time:")
 										.font(.system(size: 8))
 									// calculate the time between first waypoint and last
-									Text(String(WorkoutCore.shared.calcTime(from: workoutData.workoutDate, to: workoutData.workoutEndDate)))
+									Text(String(workoutCore.calcTime(from: workoutData.workoutDate, to: workoutData.workoutEndDate)))
 										.font(.system(size: 10))
 								}
 								.padding(.trailing, 30)
-//								HStack {
-//
-//								}
 							}
 						}
 						.foregroundColor(.white)
@@ -105,7 +103,7 @@ struct WorkoutRouteView: View {
 						}
 					}
 					.mapControlVisibility(.hidden)
-					.mapStyle(.hybrid(elevation: .realistic))
+					.mapStyle(.hybrid(elevation: .automatic))
 					.disabled(true)
 					.frame(width: UIScreen.main.bounds.width * 0.35, height: boxHeight)
 					.cornerRadius(10, corners: [.topRight, .bottomRight])
@@ -126,11 +124,11 @@ struct WorkoutRouteView: View {
 			Task {
 				isLoading = true // turn on the loading sccreen
 				print("TASK # 2: Get the routes")
-				guard let routes = await WorkoutCore.shared.getWorkoutRoute(workout: workoutData.workout),
+				guard let routes = await workoutCore.getWorkoutRoute(workout: workoutData.workout),
 						let firstRoute = routes.first else { return }
 
 				print("TASK # 3: Get the CLLocations for the routes\n")
-				locations = await WorkoutCore.shared.getCLocationDataForRoute(routeToExtract: firstRoute)
+				locations = await workoutCore.getCLocationDataForRoute(routeToExtract: firstRoute)
 				guard let firstLocation = locations?.first else {
 					print("No locations available in the route.")
 					return

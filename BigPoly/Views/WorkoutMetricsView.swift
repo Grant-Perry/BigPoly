@@ -30,7 +30,7 @@ struct WorkoutMetricsView: View {
 					VStack {
 						Text("\(cityName)")
 							.font(.title).bold()
-							.lineLimit(1)
+							.lineLimit(2)
 							.minimumScaleFactor(0.5)
 							.scaledToFit()
 
@@ -57,7 +57,7 @@ struct WorkoutMetricsView: View {
 								
 								Text(pastCast.condition ?? "")
 									.font(.footnote)
-									.lineLimit(1)
+									.lineLimit(2)
 									.minimumScaleFactor(0.5)
 									.scaledToFit()
 									.goLeft()

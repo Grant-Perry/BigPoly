@@ -15,29 +15,32 @@ import UIKit
 /// This is the full map view when the NavigationLink on the list view from WorkoutRouteView is selected
 
 struct FullMapView: View {
-	//	let workout: HKWorkout
+
 	@State var thisWorkoutData: WorkoutData
-//	@State private var selectedMapStyle: String = ".hybrid"
-	@State  var regionx = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-														 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
 	@State var isLoading = true
-	var position: MapCameraPosition = .automatic
+	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+	@State var position: MapCameraPosition = .automatic
 	let gradient = LinearGradient(colors: [.gpPink, .gpYellow, .gpGreen], startPoint: .leading, endPoint: .trailing)
-	let stroke = StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round) //,
-//		dash: [5, 5])
-	
+	let stroke = StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round) //, dash: [10, 10])
+
+
+	let initialPosition: MapCameraPosition = .automatic
+
+
 	var body: some View {
-//		region.center = thisWorkoutData.workoutCoords?.first
 
+//		let firstCoord = CLLocationCoordinate2D(latitude: Double((thisWorkoutData.workoutCoords?.first!.latitude)!),
+//													 longitude: Double((thisWorkoutData.workoutCoords?.first!.longitude)!))
+//		let firstPosition: MapCameraPosition =  .camera(MapCamera(centerCoordinate:firstCoord, distance: 0))
+//		Map(initialPosition: firstPosition) {
 		Map {
-
 			MapPolyline(coordinates: thisWorkoutData.workoutCoords!)
 				.stroke(gradient, style: stroke)
-//				.stroke(lineWidth: 6)
-			
+
 			Annotation(
-				"Start", coordinate: CLLocationCoordinate2D(latitude: Double((thisWorkoutData.workoutCoords?.first!.latitude)!), 
+				"Start", coordinate: CLLocationCoordinate2D(latitude: Double((thisWorkoutData.workoutCoords?.first!.latitude)!),
 																		  longitude: Double((thisWorkoutData.workoutCoords?.first!.longitude)!)), anchor: .bottom) {
+
 																			  Image(systemName: "figure.walk.departure")
 																				  .imageScale(.small)
 																				  .padding(4)
@@ -45,10 +48,10 @@ struct FullMapView: View {
 																				  .background(Color.gpGreen)
 																				  .cornerRadius(4)
 																		  }
-			
 			Annotation(
 				"End", coordinate: CLLocationCoordinate2D(latitude: Double((thisWorkoutData.workoutCoords?.last!.latitude)!),
 																		longitude: Double((thisWorkoutData.workoutCoords?.last!.longitude)!)), anchor: .bottom) {
+
 																			Image(systemName: "figure.walk.arrival")
 																				.imageScale(.small)
 																				.padding(4)
@@ -56,9 +59,7 @@ struct FullMapView: View {
 																				.background(Color.gpRed)
 																				.cornerRadius(4)
 																		}
-
 			//			Marker("Start", coordinate: startWorkout)
-			//			Marker("End", coordinate: endWorkout)
 		}
 		.font(.footnote)
 		.mapControlVisibility(.visible)

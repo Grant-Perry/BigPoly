@@ -22,7 +22,7 @@ struct PolyView: View {
 //	@State var histForecast:HistForecast = HistForecast()
 
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			VStack(spacing: 0) {
 				if isLoading {
 					LoadingView()
