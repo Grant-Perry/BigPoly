@@ -10,6 +10,7 @@
 
 import SwiftUI
 import HealthKit
+import MapKit
 
 struct PolyView: View {
 	@State private var workoutData: [WorkoutData] = []
@@ -19,6 +20,8 @@ struct PolyView: View {
 	// startDate is set to 3 months prior to Date()
 	@State private var startDate = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date().addingTimeInterval(-3600 * 30) // subtract 30 days from Date()
 	@State private var endDate = Date()
+	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
+
 //	@State var histForecast:HistForecast = HistForecast()
 
 	var body: some View {
@@ -39,12 +42,14 @@ struct PolyView: View {
 					showDatePicker.toggle()
 				}
 				.padding()
-				.background(.green.gradient)
+				.background(
+					LinearGradient(gradient: Gradient(colors: [.gpOrange, .gpWhite]), startPoint: .leading, endPoint: .topLeading)
+				)
 				.foregroundColor(Color.white)
 				.cornerRadius(10)
 				.padding(.top, 10) // Add some space between the list/loading view and the button
 			}
-			.navigationTitle("Workouts")
+			.navigationTitle("Gp. Workouts")
 		}
 		.onAppear {
 			Task {
@@ -59,11 +64,10 @@ struct PolyView: View {
 								workoutLimit: $workoutLimit,
 								isLoading: $isLoading,
 								onSubmit: {
-				Task {
-					await loadWorkouts()
-				}
+				Task { await loadWorkouts() }
 			})
 		}
+		.background(.blue.gradient)
 	}
 
 		// GENESIS: ...it starts EVERYTHING.

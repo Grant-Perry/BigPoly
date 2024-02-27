@@ -25,6 +25,7 @@ struct WorkoutRouteView: View {
 	@State var isLoading = true
 	@State var locations: [CLLocation]? = nil
 	@State private var position: MapCameraPosition = .automatic
+	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1.25, longitudeDelta: 1.25))
 	var boxHeight = 125.0
 
 	var body: some View {
@@ -42,12 +43,13 @@ struct WorkoutRouteView: View {
 							.font(.system(size: 15))
 							.foregroundColor(.white)
 							.rightJustify()
-							.padding(EdgeInsets(top: 3, leading: 0, bottom: 0, trailing: 30))
+							.padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 33))
 
 						//						Spacer()
 						Text(workoutData.workoutAddress?.city ?? "Loading...")
 							.font(.system(size: 22)).bold()
 							.foregroundColor(.white)
+//							.padding(EdgeInsets(top: 1, leading: 15, bottom: 0, trailing: 0))
 							.padding(.leading)
 							.leftJustify()
 
@@ -76,7 +78,7 @@ struct WorkoutRouteView: View {
 										.font(.system(size: 8))
 									// calculate the time between first waypoint and last
 									Text(String(workoutCore.calcTime(from: workoutData.workoutDate, to: workoutData.workoutEndDate)))
-										.font(.system(size: 10))
+										.font(.system(size: 11))
 								}
 								.padding(.trailing, 30)
 							}
@@ -94,7 +96,11 @@ struct WorkoutRouteView: View {
 
 // MARK: -> Map container
 				if let coordinate = locations?.first?.coordinate {
+					
 					Map(position: $position) {
+
+
+
 						Annotation(
 							"❤️",
 							coordinate: coordinate,
@@ -102,8 +108,12 @@ struct WorkoutRouteView: View {
 						) {
 						}
 					}
+					.onAppear {
+						// adjust the camera position for these coordinates
+						updateCameraPosition()
+					}
 					.mapControlVisibility(.hidden)
-					.mapStyle(.hybrid(elevation: .automatic))
+					.mapStyle(.hybrid(elevation: .realistic))
 					.disabled(true)
 					.frame(width: UIScreen.main.bounds.width * 0.35, height: boxHeight)
 					.cornerRadius(10, corners: [.topRight, .bottomRight])
@@ -111,18 +121,18 @@ struct WorkoutRouteView: View {
 				} else {
 					Text("No Map Data")
 						.frame(width: UIScreen.main.bounds.width * 0.5, height: boxHeight)
-						.background(Color.gray)
+						.background(.blue.gradient)
 						.cornerRadius(10)
 				}
 			}
 		}
-		// MARK: - Full Container
+// MARK: - Full Container
 		.frame(width: UIScreen.main.bounds.width * 0.65, height: boxHeight)
 		//			.frame(width: UIScreen.main.bounds.width * 0.9, height: heights)
 		.padding([.top, .horizontal])
 		.onAppear() {
 			Task {
-				isLoading = true // turn on the loading sccreen
+				isLoading = true // turn on the loading screen
 				print("TASK # 2: Get the routes")
 				guard let routes = await workoutCore.getWorkoutRoute(workout: workoutData.workout),
 						let firstRoute = routes.first else { return }
@@ -151,6 +161,21 @@ struct WorkoutRouteView: View {
 		}
 		.preferredColorScheme(.light)
 
+	}
+
+	private func updateCameraPosition() {
+		// set the center, distance, heading and pitch for the MapCamera for this map view
+
+		if let coordinate = locations?.first?.coordinate {
+
+			position = .camera(
+				MapCamera (
+					centerCoordinate: CLLocationCoordinate2D(
+						latitude: coordinate.latitude, longitude: coordinate.longitude),
+					distance: 1.5,
+					heading: 242,
+					pitch: 60))
+		}
 	}
 }
 

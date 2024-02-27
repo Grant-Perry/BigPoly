@@ -2,7 +2,7 @@
 //   BigPoly
 //
 //   Created by: Grant Perry on 2/20/24 at 2:53 PM
-//     Modified: 
+//     Modified:
 //
 //  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
 //
@@ -19,16 +19,16 @@ struct DatePickerView: View {
 	@Environment(\.presentationMode) var presentationMode
 
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			Form {
 				DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
 				DatePicker("End Date", selection: $endDate, displayedComponents: .date)
-				Picker("Workout Limit", selection: $workoutLimit) {
+				Picker("Workouts", selection: $workoutLimit) {
 					ForEach(Array(stride(from: 50, through: 500, by: 50)), id: \.self) {
 						Text("\($0) Workouts").tag($0)
 					}
 				}
-				Button("Done") {
+				Button("go") {
 					onSubmit()
 					// turn the isLoading screen back on
 					isLoading = true
@@ -39,10 +39,16 @@ struct DatePickerView: View {
 				.foregroundColor(Color.white)
 				.cornerRadius(10)
 				.padding(.top, 10)
+				.horizontallyCentered()
 				rightJustify()
 			}
-			}
-			.navigationTitle("Modify Date")
 		}
+		.background(.blue.gradient)
+		.cornerRadius(10)
+
+		//		.preferredColorScheme(.dark)
+		.navigationTitle("Modify Date")
+
 	}
+}
 

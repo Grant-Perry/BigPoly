@@ -9,6 +9,26 @@
 
 import SwiftUI
 
+// Top justification
+struct GoTopModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		VStack {
+			content
+			Spacer()
+		}
+	}
+}
+
+// Bottom justification
+struct GoBottomModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		VStack {
+			Spacer()
+			content
+		}
+	}
+}
+
 // left justification
 struct GoLeftModifier: ViewModifier {
 	func body(content: Content) -> some View {
@@ -39,6 +59,20 @@ extension View {
 extension View {
 	func goRight() -> some View {
 		self.modifier(GoRightModifier())
+	}
+}
+
+// Extension to apply the .goTop modifier
+extension View {
+	func goTop() -> some View {
+		self.modifier(GoTopModifier())
+	}
+}
+
+// Extension to apply the .goBottom modifier
+extension View {
+	func goBottom() -> some View {
+		self.modifier(GoBottomModifier())
 	}
 }
 

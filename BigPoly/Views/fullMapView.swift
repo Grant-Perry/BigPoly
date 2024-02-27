@@ -18,21 +18,12 @@ struct FullMapView: View {
 
 	@State var thisWorkoutData: WorkoutData
 	@State var isLoading = true
-	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-	@State var position: MapCameraPosition = .automatic
+//	@State var position: MapCameraPosition = .automatic
 	let gradient = LinearGradient(colors: [.gpPink, .gpYellow, .gpGreen], startPoint: .leading, endPoint: .trailing)
 	let stroke = StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round) //, dash: [10, 10])
 
-
-	let initialPosition: MapCameraPosition = .automatic
-
-
 	var body: some View {
 
-//		let firstCoord = CLLocationCoordinate2D(latitude: Double((thisWorkoutData.workoutCoords?.first!.latitude)!),
-//													 longitude: Double((thisWorkoutData.workoutCoords?.first!.longitude)!))
-//		let firstPosition: MapCameraPosition =  .camera(MapCamera(centerCoordinate:firstCoord, distance: 0))
-//		Map(initialPosition: firstPosition) {
 		Map {
 			MapPolyline(coordinates: thisWorkoutData.workoutCoords!)
 				.stroke(gradient, style: stroke)

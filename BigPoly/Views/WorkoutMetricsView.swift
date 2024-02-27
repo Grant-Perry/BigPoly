@@ -30,7 +30,7 @@ struct WorkoutMetricsView: View {
 					VStack {
 						Text("\(cityName)")
 							.font(.title).bold()
-							.lineLimit(2)
+							.lineLimit(1)
 							.minimumScaleFactor(0.5)
 							.scaledToFit()
 

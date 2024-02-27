@@ -2,12 +2,9 @@
 //   BigPoly
 //
 //   Created by: Grant Perry on 2/24/24 at 9:47 AM
-//     Modified: Saturday February 24, 2024 at 10:07:28 AM
-
-// 	brought over from BigMetric-Monkey -
-//
 //  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
-//  Modified: Monday February 26, 2024 at 10:09:52 AM
+
+//  Modified: Modified: Tuesday February 27, 2024 at 9:26:35 AM
 
 import SwiftUI
 import Observation
@@ -21,7 +18,7 @@ class WeatherKitManager: NSObject {
 	var dailyForecast : Forecast<DayWeather>?
 	var hourlyForecast : Forecast<HourWeather>?
 	let weatherService = WeatherService()
-	let sharedService = WeatherService.shared
+	let sharedWeatherService = WeatherService.shared
 	var date: Date = .now
 	var latitude: Double = 0
 	var longitude: Double = 0
@@ -66,28 +63,26 @@ class WeatherKitManager: NSObject {
 	}
 
 	private func fetchWeather(for coordinate: CLLocationCoordinate2D) async throws -> Weather {
-		let weather = try await Task.detached(priority: .userInitiated) { [self] in
-			return try await self.sharedService.weather(for: self.convertToCLLocation(coordinate))
-		}.value
+		// Convert coordinate to CLLocation within the async context to ensure all parts of the operation can be cancelled together.
+		let location = convertToCLLocation(coordinate)
+
+		// Directly await the weather fetching without detaching a new task, assuming sharedService's weather function is already async.
+		let weather = try await sharedWeatherService.weather(for: location)
+
 		return weather
 	}
 
-	// Function to fetch historical weather forecast for a specific location and date range
+	// Fetch historical weather forecast for a specific location and date range
 	//  Modified: Saturday February 24, 2024 at 10:01:36 AM
-	func fetchPastCast(forWhere: CLLocation, 
-							 forWhenStart: Date,
-							 forWhenEnd: Date,
-							 pastCast: PastForecast) async {
-		
+	func fetchPastCast(forWhere: CLLocation, forWhenStart: Date, forWhenEnd: Date, pastCast: PastForecast) async {
 		let weatherService = WeatherService()
-
+		print("[fetchPastCast]: startDate = \(forWhenStart) - endDate = \(forWhenStart.addingTimeInterval(86400)) ")
 		do {
 			// Fetch the weather forecast for the specified location and date range
 			let forecast = try await weatherService.weather(for: forWhere, 
 																			including: .daily(startDate: forWhenStart,
 																									endDate: forWhenStart.addingTimeInterval(86400)))
 			if let firstCast 			= forecast.first {
-				
 				pastCast.symbolName 	= firstCast.symbolName
 				pastCast.condition 	= firstCast.condition.description
 				pastCast.minTemp 		= firstCast.lowTemperature.value
@@ -99,7 +94,6 @@ class WeatherKitManager: NSObject {
 				if let symbolName = pastCast.symbolName {
 					print("symbolName = \(symbolName)")
 				}
-
 			}
 		} catch {
 			print("Error fetching weather forecast for the specified date range: \(error)")
@@ -124,23 +118,21 @@ class WeatherKitManager: NSObject {
 					return
 				}
 
-				precipForecast2	= firstHourlyForecast.precipitationChance
-				precipForecast	= firstHourlyForecast.precipitationAmount.value
-				symbolHourly		= firstHourlyForecast.symbolName
-				tempHour			= String(format: "%.0f", firstHourlyForecast.temperature.converted(to: .fahrenheit).value )
-				tempVar				= String(format: "%.0f", current.temperature.converted(to: .fahrenheit).value )
-				highTempVar		= String(format: "%.0f", dailyForecast.first?.highTemperature.converted(to: .fahrenheit).value ?? 0 )
-				lowTempVar			= String(format: "%.0f", dailyForecast.first?.lowTemperature.converted(to: .fahrenheit).value ?? 0 )
-				windSpeedVar		= current.wind.speed.converted(to: .milesPerHour).value
-				windDirectionVar	= CardinalDirection(course: current.wind.direction.converted(to: .degrees).value).rawValue
-				symbolVar			= current.symbolName
-				//					locationName		= distanceTracker.locationName
+				precipForecast2 = firstHourlyForecast.precipitationChance
+				precipForecast = firstHourlyForecast.precipitationAmount.value
+				symbolHourly = firstHourlyForecast.symbolName
+				tempHour = String(format: "%.0f", firstHourlyForecast.temperature.converted(to: .fahrenheit).value )
+				tempVar = String(format: "%.0f", current.temperature.converted(to: .fahrenheit).value )
+				highTempVar = String(format: "%.0f", dailyForecast.first?.highTemperature.converted(to: .fahrenheit).value ?? 0 )
+				lowTempVar = String(format: "%.0f", dailyForecast.first?.lowTemperature.converted(to: .fahrenheit).value ?? 0 )
+				windSpeedVar = current.wind.speed.converted(to: .milesPerHour).value
+				windDirectionVar = CardinalDirection(course: current.wind.direction.converted(to: .degrees).value).rawValue
+				symbolVar = current.symbolName
 
 				// Check to see if the dailyForecast array has anything in it for the 10-day forecast; if not, return
 				if dailyForecast.isEmpty {
 					return
 				}
-
 				let howManyDays = min(dailyForecast.count, 10)
 
 				// iterate and build the daily weather display
@@ -163,13 +155,11 @@ class WeatherKitManager: NSObject {
 		}
 	}
 
-
-	@discardableResult
 	func dailyForecast(for coordinate: CLLocationCoordinate2D) async -> Forecast<DayWeather>? {
 		let currentCoord     	= CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
 		let dayWeather       	= await Task.detached(priority: .userInitiated) {
 			/// let (current, minute, hourly) = try await service.weather(for: newYork, including: .current, .minute, .hourly)
-			let dayForecast	= try? await self.sharedService.weather(
+			let dayForecast	= try? await self.sharedWeatherService.weather(
 				for: currentCoord,
 				including: .daily)
 			return dayForecast
@@ -178,11 +168,10 @@ class WeatherKitManager: NSObject {
 		return dayWeather
 	}
 
-	@discardableResult
 	func hourlyForecast(for coordinate: CLLocationCoordinate2D) async -> Forecast<HourWeather>? {
 		let currentCoord		=  CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
 		let hourWeather			= await Task.detached(priority: .userInitiated) {
-			let hourForecast	= try? await self.sharedService.weather(
+			let hourForecast	= try? await self.sharedWeatherService.weather(
 				for: currentCoord,
 				including: .hourly)
 			return hourForecast

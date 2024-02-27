@@ -57,10 +57,11 @@ struct LoadingView: View {
 			.background(.blue.gradient.opacity(0.8))
 			.cornerRadius(20)
 			.horizontallyCentered()
-			.preferredColorScheme(.light)
+
 		}
+		.preferredColorScheme(.dark)
 		.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-		.background(.white)
+//		.background(.black)
 //		.background(.blue.gradient)
 	}
 }
