@@ -3,7 +3,7 @@
 	//   BigPoly
 	//
 	//   Created by: Grant Perry on 2/8/24 at 9:26 AM
-	//     Modified:
+	//     Modified: Saturday March 2, 2024 at 4:01:25 PM - M2
 	//
 	//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
 	//
@@ -21,8 +21,6 @@ struct PolyView: View {
 	@State private var startDate = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date().addingTimeInterval(-3600 * 30) // subtract 30 days from Date()
 	@State private var endDate = Date()
 	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
-
-//	@State var histForecast:HistForecast = HistForecast()
 
 	var body: some View {
 		NavigationStack {
