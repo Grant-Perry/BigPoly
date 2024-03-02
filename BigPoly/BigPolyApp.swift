@@ -14,12 +14,14 @@ struct BigPolyApp: App {
     var body: some Scene {
         WindowGroup {
 			  PolyView()
+//			  LocationPreviewView()
         }
     }
 }
 
 #Preview {
-	PolyView()
+	LocationPreviewView_Orig()
+//	PolyView()
 }
 
 

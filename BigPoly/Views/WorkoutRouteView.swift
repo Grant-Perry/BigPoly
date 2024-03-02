@@ -37,7 +37,7 @@ struct WorkoutRouteView: View {
 						.background(Color.blue.gradient)
 						.cornerRadius(10)
 				} else {
- // MARK: - Address Container
+					// MARK: - Address Container
 					VStack {
 						Text(workoutData.workoutDate.formatted(as: "MMM d, yy"))
 							.font(.system(size: 15))
@@ -49,7 +49,7 @@ struct WorkoutRouteView: View {
 						Text(workoutData.workoutAddress?.city ?? "Loading...")
 							.font(.system(size: 22)).bold()
 							.foregroundColor(.white)
-//							.padding(EdgeInsets(top: 1, leading: 15, bottom: 0, trailing: 0))
+						//							.padding(EdgeInsets(top: 1, leading: 15, bottom: 0, trailing: 0))
 							.padding(.leading)
 							.leftJustify()
 
@@ -94,13 +94,9 @@ struct WorkoutRouteView: View {
 					.leftJustify()
 				}
 
-// MARK: -> Map container
+				// MARK: -> Map container
 				if let coordinate = locations?.first?.coordinate {
-					
 					Map(position: $position) {
-
-
-
 						Annotation(
 							"❤️",
 							coordinate: coordinate,
@@ -126,10 +122,13 @@ struct WorkoutRouteView: View {
 				}
 			}
 		}
-// MARK: - Full Container
+		// MARK: - Full Container
 		.frame(width: UIScreen.main.bounds.width * 0.65, height: boxHeight)
 		//			.frame(width: UIScreen.main.bounds.width * 0.9, height: heights)
 		.padding([.top, .horizontal])
+
+
+
 		.onAppear() {
 			Task {
 				isLoading = true // turn on the loading screen
@@ -147,31 +146,21 @@ struct WorkoutRouteView: View {
 				self.latitude = firstLocation.coordinate.latitude
 				self.longitude = firstLocation.coordinate.longitude
 
-				// calculate this workout's distance
-				print("TASK # 4: Calculate distance\n")
-
-//				var thisWorkoutDistance = locations?.calcDistance ?? 99
-				//				WorkoutCore.shared.distance = locations?.calcDistance ?? 99
-
-				print("lat: \(latitude)  long: \(longitude)")
-
-				// close the loading window
+				// change loading window state to close it
 				self.isLoading = false
 			}
 		}
 		.preferredColorScheme(.light)
-
 	}
+	
 
 	private func updateCameraPosition() {
 		// set the center, distance, heading and pitch for the MapCamera for this map view
 
-		if let coordinate = locations?.first?.coordinate {
-
+		if let thisCoords = locations?.first?.coordinate {
 			position = .camera(
 				MapCamera (
-					centerCoordinate: CLLocationCoordinate2D(
-						latitude: coordinate.latitude, longitude: coordinate.longitude),
+					centerCoordinate: thisCoords,
 					distance: 1.5,
 					heading: 242,
 					pitch: 60))

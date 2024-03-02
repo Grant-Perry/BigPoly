@@ -17,13 +17,12 @@ import UIKit
 struct FullMapView: View {
 
 	@State var thisWorkoutData: WorkoutData
-	@State var isLoading = true
-//	@State var position: MapCameraPosition = .automatic
+	@State var isAvail = false // for lookaround scene
+	//	@State var position: MapCameraPosition = .automatic
 	let gradient = LinearGradient(colors: [.gpPink, .gpYellow, .gpGreen], startPoint: .leading, endPoint: .trailing)
 	let stroke = StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round) //, dash: [10, 10])
 
 	var body: some View {
-
 		Map {
 			MapPolyline(coordinates: thisWorkoutData.workoutCoords!)
 				.stroke(gradient, style: stroke)
@@ -52,6 +51,16 @@ struct FullMapView: View {
 																		}
 			//			Marker("Start", coordinate: startWorkout)
 		}
+		.onAppear { 
+			// determine if there is a valid lookaround scene available
+			// use it to set the .frame height to 0 if false
+			Task {
+				if let thisCoord = thisWorkoutData.workoutCoords?.first {
+					isAvail = await isLookAroundAvailable(for: thisCoord)
+					print("lookAround Status: \(isAvail)")
+				}
+			}
+		}
 		.font(.footnote)
 		.mapControlVisibility(.visible)
 		.controlSize(.small)
@@ -62,7 +71,7 @@ struct FullMapView: View {
 			MapScaleView()
 
 		}
-		
+
 		// MARK: Top Blue safeArea for the metrics display
 		.safeAreaInset(edge: .top) {
 			WorkoutMetricsView(thisWorkoutData: thisWorkoutData,
@@ -76,7 +85,35 @@ struct FullMapView: View {
 			.mapStyle(.imagery(elevation: .realistic))
 			.background(.clear)
 		}
+		// MARK: -> LookAround view
+		.safeAreaInset(edge: .bottom) {
+			HStack {
+				Spacer()
+				VStack(spacing: 0) {
+					LocationPreviewLookAroundView(workoutData: thisWorkoutData)
+					// the MAGIC of isAvail! pre-checked if lookaround has a valid scene. set the .frame to 0 if it is not available
+						.frame(height: isAvail ? 128 : 0)
+						.clipShape(RoundedRectangle(cornerRadius: 10))
+						.padding([.top, .horizontal])
+				}
+				Spacer()
+			}
+			.background(.thinMaterial)
+		}
+	}
+
+}
+
+
+func isLookAroundAvailable(for coordinate: CLLocationCoordinate2D) async -> Bool {
+	do {
+		let thisScene = try await MKLookAroundSceneRequest(coordinate: coordinate).scene
+		return thisScene != nil
+	} catch {
+		//			retScene = "NOT VALID"
+		return false
 	}
 }
+
 
 

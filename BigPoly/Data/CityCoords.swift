@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct CityCoords {
 	var cityName: String
@@ -38,3 +39,4 @@ let cityCoords: [String: CityCoords] = [
 	"Denver": CityCoords(cityName: "Denver", longitude: -104.990251, latitude: 39.739236),
 	"Washington": CityCoords(cityName: "Washington D.C.", longitude: -77.036871, latitude: 38.907192)
 ]
+
