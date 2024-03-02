@@ -27,7 +27,6 @@ struct PolyView: View {
 			VStack(spacing: 0) {
 				if isLoading {
 					LoadingView()
-
 				} else {
 					List(workoutData, id: \.workout.uuid) { listWorkoutData in
 						NavigationLink(destination: FullMapView(thisWorkoutData: listWorkoutData)) {
@@ -51,7 +50,6 @@ struct PolyView: View {
 		}
 		.onAppear {
 			Task {
-
 				// The initial call to build the data
 				await loadWorkouts()
 			}
@@ -65,16 +63,17 @@ struct PolyView: View {
 				Task { await loadWorkouts() }
 			})
 		}
+//		.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
 		.background(.blue.gradient)
 	}
 
-		// GENESIS: ...it starts EVERYTHING.
+// MARK: Helpers
+	
+	// GENESIS: ...it starts EVERYTHING.
 		private func loadWorkouts() async {
 			do {
 				// get user authorization
 				try await WorkoutCore.shared.requestHealthKitPermission()
-				print("inside loadWorkouts: startDate: \(startDate) - endDate: \(endDate)")
-
 				workoutData = try await WorkoutCore.shared.buildWorkoutData(startDate: startDate,
 																								endDate: endDate,
 																								limit: workoutLimit)
