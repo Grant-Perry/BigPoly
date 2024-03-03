@@ -10,6 +10,10 @@
 import SwiftUI
 
 struct LoadingView: View {
+	var calledFrom: String
+	var workType: String
+	var icon: String
+
 	var progress = Color(#colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1))
 	var bg = Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
 	var bgTop = Color(#colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1))
@@ -25,12 +29,12 @@ struct LoadingView: View {
 				}
 				VStack {
 					HStack {
-						Text("PolyView")
+						Text(calledFrom)
 							.foregroundStyle(.white)
 							.font(.system(size: 22))
 							.padding(EdgeInsets(top: 5, leading: 16, bottom: 16, trailing: 16))
 						Spacer()
-						Image(systemName: "map.circle")
+						Image(systemName: icon)
 							.resizable()
 							.frame(width: 36, height: 36)
 							.foregroundColor(.white)
@@ -41,7 +45,7 @@ struct LoadingView: View {
 				VStack {
 					Spacer(minLength: 75)
 					VStack {
-						Text("Loading Workouts...")
+						Text("Loading \(workType)...")
 							.foregroundColor(.white)
 							.font(.title2)
 							.padding(.bottom, 15)
@@ -67,5 +71,5 @@ struct LoadingView: View {
 }
 
 #Preview {
-    LoadingView()
+    LoadingView(calledFrom: "Preview", workType: "Workouts", icon: "map.circle")
 }

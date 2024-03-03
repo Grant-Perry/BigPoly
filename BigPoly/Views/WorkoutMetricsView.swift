@@ -22,7 +22,7 @@ struct WorkoutMetricsView: View {
 	var body: some View {
 		VStack {
 			if isLoading {
-				LoadingView()
+				LoadingView(calledFrom: "Metrics", workType: "Workouts", icon: "map.fill")
 			} else {
 				HStack {
  // MARK:    -----  L E F T   S I D E --------------

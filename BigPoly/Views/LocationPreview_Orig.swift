@@ -14,6 +14,7 @@ struct LocationPreviewView_Orig: View {
 	@State private var selection: UUID?
 
 	let myFavoriteLocations = [
+		MyFavoriteLocation(name: "Verde", coordinate: .Verde),
 		MyFavoriteLocation(name: "Today", coordinate: .todayRun),
 		MyFavoriteLocation(name: "Empire state building", coordinate: .empireStateBuilding),
 		MyFavoriteLocation(name: "Columbia University", coordinate: .columbiaUniversity),

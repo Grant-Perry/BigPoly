@@ -16,6 +16,8 @@ import MapKit
 @Observable
 class WorkoutCore {
 	static let shared = WorkoutCore()
+	var fullMapLoading = false // state to track navigation when NavigationLink pressed
+
 	var distance: Double = 0
 	private let healthStore = HKHealthStore()
 	var cityNames: [UUID: String] = [:] // Maps workout UUID to city names

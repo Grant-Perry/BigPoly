@@ -1,12 +1,12 @@
 
-	//   polyView.swift
-	//   BigPoly
-	//
-	//   Created by: Grant Perry on 2/8/24 at 9:26 AM
-	//     Modified: Saturday March 2, 2024 at 4:01:25 PM - M2
-	//
-	//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
-	//
+//   polyView.swift
+//   BigPoly
+//
+//   Created by: Grant Perry on 2/8/24 at 9:26 AM
+//     Modified: Saturday March 2, 2024 at 4:01:25 PM - M2
+//
+//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
+//
 
 import SwiftUI
 import HealthKit
@@ -15,6 +15,7 @@ import MapKit
 struct PolyView: View {
 	@State private var workoutData: [WorkoutData] = []
 	@State var isLoading = true
+	@State var workoutCore = WorkoutCore.shared
 	@State private var workoutLimit = 50
 	@State private var showDatePicker = false
 	// startDate is set to 3 months prior to Date()
@@ -22,19 +23,32 @@ struct PolyView: View {
 	@State private var endDate = Date()
 	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
 
+
 	var body: some View {
 		NavigationStack {
 			VStack(spacing: 0) {
 				if isLoading {
-					LoadingView()
+					LoadingView(calledFrom: "polyView", workType: "Workouts", icon: "mappin.circle.fill")
 				} else {
 					List(workoutData, id: \.workout.uuid) { listWorkoutData in
-						NavigationLink(destination: FullMapView(thisWorkoutData: listWorkoutData)) {
-							WorkoutRouteView(workoutData: listWorkoutData)
-						}
+						NavigationLink(destination: FullMapView(thisWorkoutData: listWorkoutData, showLoading: true)
+							.onAppear {
+								workoutCore.fullMapLoading = false
+							}) {
+								WorkoutRouteView(workoutData: listWorkoutData)
+							}
+//							.simultaneousGesture(TapGesture().onEnded {
+//								workoutCore.fullMapLoading = true
+//							} )
 					}
+
+					//					List(workoutData, id: \.workout.uuid) { listWorkoutData in
+					//											NavigationLink(destination: FullMapView(thisWorkoutData: listWorkoutData)) {
+					//					//							WorkoutRouteView(workoutData: listWorkoutData)
+					//						}
+					//					}
 				}
- // MARK: --- Sorting Button
+				// MARK: --- Sorting Button
 				Button("Change Dates") {
 					showDatePicker.toggle()
 				}
@@ -63,32 +77,32 @@ struct PolyView: View {
 				Task { await loadWorkouts() }
 			})
 		}
-//		.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+		//		.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
 		.background(.blue.gradient)
 	}
 
-// MARK: Helpers
-	
+	// MARK: Helpers
+
 	// GENESIS: ...it starts EVERYTHING.
-		private func loadWorkouts() async {
-			do {
-				// get user authorization
-				try await WorkoutCore.shared.requestHealthKitPermission()
-				workoutData = try await WorkoutCore.shared.buildWorkoutData(startDate: startDate,
-																								endDate: endDate,
-																								limit: workoutLimit)
-			} catch {
-				print("Error loading workouts: \(error)")
-				isLoading = false
-			}
-			//			turn off the loading screen
+	private func loadWorkouts() async {
+		do {
+			// get user authorization
+			try await WorkoutCore.shared.requestHealthKitPermission()
+			workoutData = try await WorkoutCore.shared.buildWorkoutData(startDate: startDate,
+																							endDate: endDate,
+																							limit: workoutLimit)
+		} catch {
+			print("Error loading workouts: \(error)")
 			isLoading = false
 		}
+		//			turn off the loading screen
+		isLoading = false
 	}
+}
 
-	#Preview {
-		PolyView()
-	}
+#Preview {
+	PolyView()
+}
 
 
 

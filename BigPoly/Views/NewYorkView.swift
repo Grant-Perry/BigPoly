@@ -41,5 +41,6 @@ extension CLLocationCoordinate2D {
 	static let empireStateBuilding = CLLocationCoordinate2D(latitude: 40.7484, longitude: -73.9857)
 	static let columbiaUniversity = CLLocationCoordinate2D(latitude: 40.8075, longitude: -73.9626)
 	static let todayRun = CLLocationCoordinate2D(latitude: 37.0519, longitude: -76.4785)
+	static let Verde = CLLocationCoordinate2D(latitude: 33.7491, longitude: -118.40655)
 
 }

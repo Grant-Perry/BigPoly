@@ -125,7 +125,8 @@ struct WorkoutRouteView: View {
 		// MARK: - Full Container
 		.frame(width: UIScreen.main.bounds.width * 0.65, height: boxHeight)
 		//			.frame(width: UIScreen.main.bounds.width * 0.9, height: heights)
-		.padding([.top, .horizontal])
+//		.padding([.top, .horizontal])
+		.padding(.top, 0) // padding between cards
 
 
 
