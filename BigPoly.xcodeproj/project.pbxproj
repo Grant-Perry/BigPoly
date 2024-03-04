@@ -50,7 +50,7 @@
 		9BDA99A32B925D9E0088C59C /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A22B925D9E0088C59C /* RouteView.swift */; };
 		9BDA99A52B9260270088C59C /* NewYorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A42B9260270088C59C /* NewYorkView.swift */; };
 		9BDA99A72B92612F0088C59C /* LocationPreviewLookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A62B92612F0088C59C /* LocationPreviewLookAroundView.swift */; };
-		9BDA99A92B9266760088C59C /* LocationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A82B9266760088C59C /* LocationPreviewView.swift */; };
+		9BDA99A92B9266760088C59C /* LocationPreviewViewDELETE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A82B9266760088C59C /* LocationPreviewViewDELETE.swift */; };
 		9BDA99AB2B9266E50088C59C /* MyFavoriteLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99AA2B9266E50088C59C /* MyFavoriteLocation.swift */; };
 		9BDA99AD2B9397900088C59C /* LocationPreview_Orig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99AC2B9397900088C59C /* LocationPreview_Orig.swift */; };
 		9BDA99AF2B9398610088C59C /* LocationPreviewLookAroundView_Orig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99AE2B9398610088C59C /* LocationPreviewLookAroundView_Orig.swift */; };
@@ -103,7 +103,7 @@
 		9BDA99A22B925D9E0088C59C /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		9BDA99A42B9260270088C59C /* NewYorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewYorkView.swift; sourceTree = "<group>"; };
 		9BDA99A62B92612F0088C59C /* LocationPreviewLookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewLookAroundView.swift; sourceTree = "<group>"; };
-		9BDA99A82B9266760088C59C /* LocationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewView.swift; sourceTree = "<group>"; };
+		9BDA99A82B9266760088C59C /* LocationPreviewViewDELETE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewViewDELETE.swift; sourceTree = "<group>"; };
 		9BDA99AA2B9266E50088C59C /* MyFavoriteLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteLocation.swift; sourceTree = "<group>"; };
 		9BDA99AC2B9397900088C59C /* LocationPreview_Orig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreview_Orig.swift; sourceTree = "<group>"; };
 		9BDA99AE2B9398610088C59C /* LocationPreviewLookAroundView_Orig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewLookAroundView_Orig.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				9BDA99A62B92612F0088C59C /* LocationPreviewLookAroundView.swift */,
 				9BDA99AE2B9398610088C59C /* LocationPreviewLookAroundView_Orig.swift */,
 				9BDA99AC2B9397900088C59C /* LocationPreview_Orig.swift */,
-				9BDA99A82B9266760088C59C /* LocationPreviewView.swift */,
+				9BDA99A82B9266760088C59C /* LocationPreviewViewDELETE.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 			files = (
 				9BDA99A72B92612F0088C59C /* LocationPreviewLookAroundView.swift in Sources */,
 				9B5269E62B7928C300695BA6 /* Address.swift in Sources */,
-				9BDA99A92B9266760088C59C /* LocationPreviewView.swift in Sources */,
+				9BDA99A92B9266760088C59C /* LocationPreviewViewDELETE.swift in Sources */,
 				9B4643392B751C1D00833432 /* polyView.swift in Sources */,
 				9BDA99A32B925D9E0088C59C /* RouteView.swift in Sources */,
 				9B5269EC2B7AC1BF00695BA6 /* DateExt.swift in Sources */,

@@ -22,8 +22,8 @@ struct LocationPreviewView_Orig: View {
 
 	var body: some View {
 		Map(selection: $selection) {
-			ForEach(myFavoriteLocations) { location in
-				Marker(location.name, coordinate: location.coordinate)
+			ForEach(myFavoriteLocations) { thisLocation in
+				Marker(thisLocation.name, coordinate: thisLocation.coordinate)
 					.tint(.orange)
 			}
 		}

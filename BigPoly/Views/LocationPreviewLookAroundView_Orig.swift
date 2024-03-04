@@ -38,13 +38,10 @@ struct LocationPreviewLookAroundView_Orig: View {
 		lookAroundScene = nil
 		Task {
 			// determine if there is a valid lookAround
-//			if await isLookaroundAvailable(for: selectedResult.coordinate) {
+//			if await isLookAroundAvailable(for: selectedResult.coordinate) {
 //			if 1 == 1 {
 				let thisRequest = MKLookAroundSceneRequest(coordinate: selectedResult.coordinate)
-				guard let lookAroundScene = try? await thisRequest.scene else {
-					throw LookaroundError.unableToCreateScene
-				}
-
+				lookAroundScene = try? await thisRequest.scene 
 		}
 	}
 

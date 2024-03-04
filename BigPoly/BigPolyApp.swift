@@ -14,7 +14,6 @@ struct BigPolyApp: App {
     var body: some Scene {
         WindowGroup {
 			  PolyView()
-//			  LocationPreviewView()
         }
     }
 }

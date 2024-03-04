@@ -9,7 +9,7 @@
 import SwiftUI
 import MapKit
 
-struct LocationPreviewView: View {
+struct LocationPreviewViewDELETE: View {
 	@State private var selection: UUID?
 
 	let myFavoriteLocations = [
