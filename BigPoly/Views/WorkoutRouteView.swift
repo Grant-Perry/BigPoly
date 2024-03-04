@@ -25,7 +25,8 @@ struct WorkoutRouteView: View {
 	@State var isLoading = true
 	@State var locations: [CLLocation]? = nil
 	@State private var position: MapCameraPosition = .automatic
-	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1.25, longitudeDelta: 1.25))
+	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), 
+														span: MKCoordinateSpan(latitudeDelta: 1.25, longitudeDelta: 1.25))
 	var boxHeight = 125.0
 
 	var body: some View {

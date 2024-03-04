@@ -26,7 +26,7 @@ struct RouteView: View {
 			if let route {
 				MapPolyline(route.polyline)
 					.stroke(.blue, lineWidth: 8)
-					.stroke(gradient, style: stroke)
+				// .stroke(gradient, style: stroke)
 			}
 		}
 		.overlay(alignment: .bottom, content: {
@@ -42,14 +42,14 @@ struct RouteView: View {
 			}
 		})
 		.onAppear(perform: {
-			fetchRouteFrom(Home, to: Williamsburg)
+			fetchRouteFrom(from: Home, to: WashingtonDC)
 		})
 	}
 }
 
 extension RouteView {
 
-	private func fetchRouteFrom(_ source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
+	private func fetchRouteFrom(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
 		let request = MKDirections.Request()
 		request.source = MKMapItem(placemark: MKPlacemark(coordinate: source))
 		request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))

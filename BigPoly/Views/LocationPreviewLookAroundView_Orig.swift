@@ -20,7 +20,6 @@ struct LocationPreviewLookAroundView_Orig: View {
 			.overlay(alignment: .bottomTrailing) {
 				HStack {
 					Text("\(selectedResult.name) - \(retScene)")
-
 				}
 				.font(.caption)
 				.foregroundStyle(.white)
@@ -41,9 +40,7 @@ struct LocationPreviewLookAroundView_Orig: View {
 //			if await isLookaroundAvailable(for: selectedResult.coordinate) {
 //			if 1 == 1 {
 				let thisRequest = MKLookAroundSceneRequest(coordinate: selectedResult.coordinate)
-				guard let lookAroundScene = try? await thisRequest.scene else {
-					throw LookaroundError.unableToCreateScene
-				}
+				lookAroundScene = try? await thisRequest.scene
 
 		}
 	}

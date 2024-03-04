@@ -35,9 +35,9 @@ class WorkoutCore {
 
 	/* GENESIS: This should be the beginning.
 
-					Build the initial workoutData model with all the workouts.
+	 Build the initial workoutData model with all the workouts.
 	 */
-	func buildWorkoutData(startDate: Date, 
+	func buildWorkoutData(startDate: Date,
 								 endDate: Date,
 								 limit: Int) async throws -> [WorkoutData] {
 
@@ -54,12 +54,12 @@ class WorkoutCore {
 			let thisCoords = routeCoordinates.first
 
 			if let latitude = thisCoords?.coordinate.latitude,
-					let longitude = thisCoords?.coordinate.longitude {
+				let longitude = thisCoords?.coordinate.longitude {
 				// Fetch address based on routeCoordinates.first
 				let fetchedAddress = await WorkoutCore.shared.fetchAndUpdateAddress(latitude: latitude, longitude: longitude)
 
 				// initialize the WorkoutData model
-				let returnWorkoutData = WorkoutData(workout: thisWorkout, 
+				let returnWorkoutData = WorkoutData(workout: thisWorkout,
 																workoutDate: thisWorkout.startDate,
 																workoutEndDate: thisWorkout.endDate,
 																workoutDistance: distance,
@@ -153,7 +153,7 @@ class WorkoutCore {
 		return dateFormatter.string(from: date)
 	}
 
-	
+
 	/// <#Description#>
 	/// - Parameter workout: extract coordinates/routes from this workout
 	/// - Returns: workouts as [HKWorkoutRoute]
@@ -222,13 +222,13 @@ class WorkoutCore {
 		return filteredWorkouts
 	}
 
-// MARK: - Address geocode lookup
+	// MARK: - Address geocode lookup
 	func fetchAndUpdateAddress(latitude: Double, longitude: Double) async -> Address? {
 
 		let geocoder = CLGeocoder()
 		let location = CLLocation(latitude: latitude, longitude: longitude)
 		var address: Address?
-//		var workoutData: WorkoutData
+		//		var workoutData: WorkoutData
 
 		do {
 			let placemarks = try await geocoder.reverseGeocodeLocation(location)
@@ -251,6 +251,25 @@ class WorkoutCore {
 		return address
 	}
 
+	// fetch directions - return and MKRoute with directions
+	func fetchRouteFrom(from source: CLLocationCoordinate2D,
+							  to destination: CLLocationCoordinate2D) async -> MKRoute {
+
+		var thisRoute: MKRoute?
+		//  var travelTime: String?
+		let request = MKDirections.Request()
+		request.transportType = .automobile //.walking
+
+		request.source = MKMapItem(placemark: MKPlacemark(coordinate: source))
+		request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+		request.transportType = .automobile
+
+		let result = try? await MKDirections(request: request).calculate()
+		thisRoute = result?.routes.first
+		return thisRoute!
+
+	}
+
 
 
 
@@ -258,45 +277,45 @@ class WorkoutCore {
 
 
 	// fetches the last limit workouts - used in GENESIS process
-//	func fetchLastWorkouts(limit: Int) async throws -> [HKWorkout] {
-//		let predicate = HKQuery.predicateForWorkouts(with: .walking)
-//		let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-//
-//		// Fetch all workouts first
-//		let allWorkouts: [HKWorkout] = try await withCheckedThrowingContinuation { continuation in
-//			let query = HKSampleQuery(sampleType: HKObjectType.workoutType(),
-//											  predicate: predicate,
-//											  limit: limit,
-//											  sortDescriptors: [sortDescriptor]) { _, result, error in
-//				if let error = error {
-//					continuation.resume(throwing: error)
-//				} else if let workouts = result as? [HKWorkout] {
-//					continuation.resume(returning: workouts)
-//				} else {
-//					continuation.resume(returning: [])
-//				}
-//			}
-//			self.healthStore.execute(query)
-//		}
-//
-//		// Filter workouts that have route data with valid coordinates
-//		var workoutsWithValidCoordinates: [HKWorkout] = []
-//		for workout in allWorkouts {
-//			// Fetch routes for each workout
-//			if let routes = await getWorkoutRoute(workout: workout), !routes.isEmpty {
-//				// Check for valid coordinates in each route
-//				for route in routes {
-//					let locations = await getCLocationDataForRoute(routeToExtract: route)
-//					if locations.contains(where: { $0.coordinate.latitude != 0 && $0.coordinate.longitude != 0 }) {
-//						workoutsWithValidCoordinates.append(workout)
-//						break // Found valid coordinates, no need to check further routes
-//					}
-//				}
-//			}
-//		}
-//
-//		return workoutsWithValidCoordinates
-//	}
+	//	func fetchLastWorkouts(limit: Int) async throws -> [HKWorkout] {
+	//		let predicate = HKQuery.predicateForWorkouts(with: .walking)
+	//		let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+	//
+	//		// Fetch all workouts first
+	//		let allWorkouts: [HKWorkout] = try await withCheckedThrowingContinuation { continuation in
+	//			let query = HKSampleQuery(sampleType: HKObjectType.workoutType(),
+	//											  predicate: predicate,
+	//											  limit: limit,
+	//											  sortDescriptors: [sortDescriptor]) { _, result, error in
+	//				if let error = error {
+	//					continuation.resume(throwing: error)
+	//				} else if let workouts = result as? [HKWorkout] {
+	//					continuation.resume(returning: workouts)
+	//				} else {
+	//					continuation.resume(returning: [])
+	//				}
+	//			}
+	//			self.healthStore.execute(query)
+	//		}
+	//
+	//		// Filter workouts that have route data with valid coordinates
+	//		var workoutsWithValidCoordinates: [HKWorkout] = []
+	//		for workout in allWorkouts {
+	//			// Fetch routes for each workout
+	//			if let routes = await getWorkoutRoute(workout: workout), !routes.isEmpty {
+	//				// Check for valid coordinates in each route
+	//				for route in routes {
+	//					let locations = await getCLocationDataForRoute(routeToExtract: route)
+	//					if locations.contains(where: { $0.coordinate.latitude != 0 && $0.coordinate.longitude != 0 }) {
+	//						workoutsWithValidCoordinates.append(workout)
+	//						break // Found valid coordinates, no need to check further routes
+	//					}
+	//				}
+	//			}
+	//		}
+	//
+	//		return workoutsWithValidCoordinates
+	//	}
 
 	/// returns the [CLLocationCoordinate2D] - coordinates from the passed HKWorkout
 
@@ -311,8 +330,8 @@ class WorkoutCore {
 				if !coords.isEmpty && coords.contains(where: { $0.coordinate.latitude != 0 && $0.coordinate.longitude != 0 }) {
 					thisCoords.append(thisWorkout)
 					retCoords = coords
-//					retCoords.append(coords)
-//					retCoords = locations.map { $0.coordinate }
+					//					retCoords.append(coords)
+					//					retCoords = locations.map { $0.coordinate }
 					break // Found valid coordinates, no need to check further routes
 				}
 			}
@@ -333,7 +352,7 @@ class WorkoutCore {
 		self.cityNames[workoutID] ?? "Unknown City"
 	}
 
-// Helper function to fetch coordinates for a route.
+	// Helper function to fetch coordinates for a route.
 	private func fetchCoordinates(for route: HKWorkoutRoute) async throws -> [CLLocationCoordinate2D] {
 		try await withCheckedThrowingContinuation { continuation in
 			var coordinates: [CLLocationCoordinate2D] = []
@@ -355,35 +374,35 @@ class WorkoutCore {
 			healthStore.execute(query)
 		}
 	}
-		// Fetches route data for a given workout and returns the coordinates.
-		func fetchRouteData(for workout: HKWorkout) async throws -> [CLLocationCoordinate2D] {
-			// Directly use HKSeriesType.workoutRoute() since it's non-optional
-			let routeType = HKSeriesType.workoutRoute()
+	// Fetches route data for a given workout and returns the coordinates.
+	func fetchRouteData(for workout: HKWorkout) async throws -> [CLLocationCoordinate2D] {
+		// Directly use HKSeriesType.workoutRoute() since it's non-optional
+		let routeType = HKSeriesType.workoutRoute()
 
-			// Fetch routes
-			let routes: [HKWorkoutRoute] = try await withCheckedThrowingContinuation { continuation in
-				let predicate = HKQuery.predicateForObjects(from: workout)
-				let query = HKSampleQuery(sampleType: routeType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
-					if let error = error {
-						continuation.resume(throwing: error)
-					} else if let routes = samples as? [HKWorkoutRoute] {
-						continuation.resume(returning: routes)
-					} else {
-						// It's crucial to resume the continuation even if no routes are found to avoid hanging.
-						continuation.resume(returning: [])
-					}
+		// Fetch routes
+		let routes: [HKWorkoutRoute] = try await withCheckedThrowingContinuation { continuation in
+			let predicate = HKQuery.predicateForObjects(from: workout)
+			let query = HKSampleQuery(sampleType: routeType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
+				if let error = error {
+					continuation.resume(throwing: error)
+				} else if let routes = samples as? [HKWorkoutRoute] {
+					continuation.resume(returning: routes)
+				} else {
+					// It's crucial to resume the continuation even if no routes are found to avoid hanging.
+					continuation.resume(returning: [])
 				}
-				self.healthStore.execute(query)
 			}
-
-			// Ensure there's at least one route to process
-			guard let firstRoute = routes.first else {
-				return []
-			}
-
-			// Proceed to fetch and process coordinates from the first route
-			return try await fetchCoordinates(for: firstRoute)
+			self.healthStore.execute(query)
 		}
+
+		// Ensure there's at least one route to process
+		guard let firstRoute = routes.first else {
+			return []
+		}
+
+		// Proceed to fetch and process coordinates from the first route
+		return try await fetchCoordinates(for: firstRoute)
+	}
 
 	func calcTime(from: Date, to: Date) -> String {
 		// Calculate the difference between the two dates
