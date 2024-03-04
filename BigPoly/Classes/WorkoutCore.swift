@@ -2,16 +2,15 @@
 	//   BigPoly
 	//
 	//   Created by: Grant Perry on 2/8/24 at 9:58 AM
-	//     Modified: Monday February 19, 2024 at 3:14:07 PM
+	//     Modified: Monday March 4, 2024 at 3:10:30 PM
 	//
 	//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
-	//
 
 import SwiftUI
 import HealthKit
 import CoreLocation
-import Observation
 import MapKit
+import Observation
 
 @Observable
 class WorkoutCore {
@@ -22,7 +21,7 @@ class WorkoutCore {
 	var cityNames: [UUID: String] = [:] // Maps workout UUID to city names
 	private init() {}
 
- /// `buildWorkoutData
+		/// `buildWorkoutData
 		/// GENESIS: This is where it all begins.
 		/// buildWorkoutData asynchronously constructs an array of `WorkoutData` objects for workouts occurring within a specified
 		/// date range. This function fetches workouts, their routes, and calculates distances to build comprehensive workout data.
@@ -34,7 +33,7 @@ class WorkoutCore {
 
 		/// - Returns: An array of `WorkoutData` objects, each representing a fetched workout with additional data like distance and address.
 		/// - Throws: An error if any part of the data fetching or processing fails.
-		func buildWorkoutData(startDate: Date, endDate: Date, limit: Int) async throws -> [WorkoutData] {
+	func buildWorkoutData(startDate: Date, endDate: Date, limit: Int) async throws -> [WorkoutData] {
 			// Fetches workouts within the specified date range and limit using an asynchronous call.
 		let workouts = try await fetchLastWorkouts(startDate: startDate, endDate: endDate, limit: limit)
 			// Prepares an empty array to hold the constructed `WorkoutData` objects.
@@ -72,7 +71,7 @@ class WorkoutCore {
 		return workoutDataList
 	}
 
-/// `fetchLastWorkouts
+		/// `fetchLastWorkouts
 		/// Fetches workouts from HealthKit that fall within a specified date range and meet certain activity type criteria ensuring they have valid route data.
 		/// This function leverages HealthKit to query for workouts that fall within a specified date range and are of certain types (walking, running, cycling). It first
 		/// fetches all matching workouts and then further filters them to include only those with associated route data containing valid geographic coordinates. The function
@@ -138,8 +137,7 @@ class WorkoutCore {
 		return workoutsWithValidCoordinates
 	}
 
-
-///  `func getWorkoutRoute
+		///  `func getWorkoutRoute
 		/// - Parameter workout: extract coordinates/routes from this workout
 		/// - Returns: workouts as [HKWorkoutRoute]
 	func getWorkoutRoute(workout: HKWorkout) async -> [HKWorkoutRoute]? {
@@ -161,7 +159,7 @@ class WorkoutCore {
 		return workouts
 	}
 
-/// `func getCLocationDataForRoute
+		/// `func getCLocationDataForRoute
 		/// asynchronously fetch geographic location data for a specific HKWorkoutRoute. Utilizes a HealthKit query
 		/// (HKWorkoutRouteQuery) to retrieve CLLocation objects associated with the route. The function employs Swift's
 		/// concurrency features (async/await along with withCheckedThrowingContinuation) to handle the asynchronous nature
@@ -212,7 +210,7 @@ class WorkoutCore {
 		}
 	}
 
-/// `func calcNumCoords
+		/// `func calcNumCoords
 		/// Calculates the number of valid coordinates for a given workout's route.
 		/// This method filters out coordinates that are exactly at (0, 0), which are likely to be invalid or placeholders.
 		/// - Parameter [work:]: `HKWorkout`, the workout for which to calculate valid coordinate count.
@@ -231,9 +229,9 @@ class WorkoutCore {
 		return filteredLocations.count
 	}
 
-// MARK: - Address geocode lookup
+		// MARK: - Address geocode lookup
 
-/// `func fetchAndUpdateAddress
+		/// `func fetchAndUpdateAddress
 		/// Asynchronously fetches and updates an address using reverse geocoding for given latitude and longitude coordinates.
 		/// - Parameters:
 		///   - [latitude:]: Double, The latitude of the location to reverse geocode.
@@ -246,7 +244,6 @@ class WorkoutCore {
 		let location = CLLocation(latitude: latitude, longitude: longitude)
 			// Prepares a variable to store the result.
 		var address: Address?
-		//		var workoutData: WorkoutData
 
 		do {
 				// Performs the reverse geocoding operation.
@@ -271,74 +268,6 @@ class WorkoutCore {
 			// Returns the constructed Address object, or nil if the operation failed.
 		return address
 	}
-
-	// fetch directions - return and MKRoute with directions
-	func fetchRouteFrom(from source: CLLocationCoordinate2D,
-							  to destination: CLLocationCoordinate2D) async -> MKRoute {
-
-		var thisRoute: MKRoute?
-		//  var travelTime: String?
-		let request = MKDirections.Request()
-		request.transportType = .automobile //.walking
-
-		request.source = MKMapItem(placemark: MKPlacemark(coordinate: source))
-		request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
-		request.transportType = .automobile
-
-		let result = try? await MKDirections(request: request).calculate()
-		thisRoute = result?.routes.first
-		return thisRoute!
-
-	}
-
-
-
-
-
-
-
-	// fetches the last limit workouts - used in GENESIS process
-	//	func fetchLastWorkouts(limit: Int) async throws -> [HKWorkout] {
-	//		let predicate = HKQuery.predicateForWorkouts(with: .walking)
-	//		let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-	//
-	//		// Fetch all workouts first
-	//		let allWorkouts: [HKWorkout] = try await withCheckedThrowingContinuation { continuation in
-	//			let query = HKSampleQuery(sampleType: HKObjectType.workoutType(),
-	//											  predicate: predicate,
-	//											  limit: limit,
-	//											  sortDescriptors: [sortDescriptor]) { _, result, error in
-	//				if let error = error {
-	//					continuation.resume(throwing: error)
-	//				} else if let workouts = result as? [HKWorkout] {
-	//					continuation.resume(returning: workouts)
-	//				} else {
-	//					continuation.resume(returning: [])
-	//				}
-	//			}
-	//			self.healthStore.execute(query)
-	//		}
-	//
-	//		// Filter workouts that have route data with valid coordinates
-	//		var workoutsWithValidCoordinates: [HKWorkout] = []
-	//		for workout in allWorkouts {
-	//			// Fetch routes for each workout
-	//			if let routes = await getWorkoutRoute(workout: workout), !routes.isEmpty {
-	//				// Check for valid coordinates in each route
-	//				for route in routes {
-	//					let locations = await getCLocationDataForRoute(routeToExtract: route)
-	//					if locations.contains(where: { $0.coordinate.latitude != 0 && $0.coordinate.longitude != 0 }) {
-	//						workoutsWithValidCoordinates.append(workout)
-	//						break // Found valid coordinates, no need to check further routes
-	//					}
-	//				}
-	//			}
-	//		}
-	//
-	//		return workoutsWithValidCoordinates
-	//	}
-
-	/// returns the [CLLocationCoordinate2D] - coordinates from the passed HKWorkout
 
 		/// `getWorkoutCoords
 		/// Asynchronously fetches the geographical coordinates from the routes of a specified workout.
@@ -380,7 +309,6 @@ class WorkoutCore {
 		self.cityNames[workoutID] ?? "Unknown City"
 	}
 
-
 		/// `func fetchCoordinates`
 		/// Asynchronously retrieves the geographical coordinates for a specified workout route.
 		/// This function uses HealthKit's `HKWorkoutRouteQuery` to fetch location data related to a workout route,
@@ -419,7 +347,7 @@ class WorkoutCore {
 		}
 	}
 
-/// `fetchRouteData`
+		/// `fetchRouteData`
 		/// Asynchronously fetches route data for a specified workout and returns the geographic coordinates.
 		/// Utilizes HealthKit to query for `HKWorkoutRoute` objects associated with the given `HKWorkout`.
 		/// - Parameter [for workout:]: `HKWorkout`, The workout from which to fetch route data.
@@ -443,7 +371,6 @@ class WorkoutCore {
 					continuation.resume(returning: routes)
 						// Ensures the continuation is always resumed to avoid hanging, even if no routes are found.
 				} else {
-					// It's crucial to resume the continuation even if no routes are found to avoid hanging.
 					continuation.resume(returning: [])
 				}
 			}
@@ -462,7 +389,7 @@ class WorkoutCore {
 		return try await fetchCoordinates(for: firstRoute)
 	}
 
-/// `func calcTime`
+		/// `func calcTime`
 		/// Calculates the time difference between two dates and formats it as a string.
 		/// - Parameters:
 		///   - from: The start date of the time interval.

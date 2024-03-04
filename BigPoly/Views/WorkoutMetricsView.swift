@@ -1,15 +1,15 @@
-//   WorkoutMetricsView.swift
-//   BigPoly
-//
-//   Created by: Grant Perry on 2/14/24 at 12:20 PM
-//     Modified: Sunday February 25, 2024 at 7:19:57 PM
-//
-//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
-//
+	//   WorkoutMetricsView.swift
+	//   BigPoly
+	//
+	//   Created by: Grant Perry on 2/14/24 at 12:20 PM
+	//     Modified: Monday March 4, 2024 at 12:36:08 AM
+	//
+	//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
+	//
 import SwiftUI
 import CoreLocation
 
-	/// Called from WorkoutRouteView 
+	/// Called from WorkoutRouteView
 	/// Displays workout metrics including location, date, distance, and weather conditions.
 	/// - Property List:
 	///   - [thisWorkoutData]: WorkoutData, State, Stores workout data including routes and distance.
@@ -33,11 +33,11 @@ struct WorkoutMetricsView: View {
 	var body: some View {
 		VStack {
 			if isLoading {
-					// Displays a loading view when data is being fetched.
 				LoadingView(calledFrom: "Metrics", workType: "Workouts", icon: "map.fill")
 			} else {
 				HStack {
-						// Left side of the view displaying city name and workout date.
+						// MARK:    -----  L E F T   S I D E --------------
+						// Left side with cityName
 					VStack {
 						Text("\(cityName)")
 							.font(.title).bold()
@@ -52,14 +52,17 @@ struct WorkoutMetricsView: View {
 					.frame(width: UIScreen.main.bounds.width * 0.45, alignment: .center)
 					.padding(.trailing)
 
-					Spacer() // Separates the left and right sides of the HStack.
+					Spacer() // This will ensure left and right sides are separated
 
-						// Right side of the view displaying weather conditions and distance.
+						// MARK:         -----  R I G H T  S I D E --------------
+						// Right side with workoutDate, and thisDistance
+						// MARK: -> conditions
 					VStack(alignment: .trailing) {
 						HStack(alignment: .top, spacing: 4) {
 							if let symbolName = pastCast.symbolName {
 								Image(systemName: symbolName)
 									.font(.footnote)
+									.goRight()
 
 								Spacer()
 
@@ -68,13 +71,17 @@ struct WorkoutMetricsView: View {
 									.lineLimit(2)
 									.minimumScaleFactor(0.5)
 									.scaledToFit()
+									.goLeft()
 							}
 						}
 
+							// MARK: -> Min & Max Temp
 						HStack(alignment: .center, spacing: 4) {
+								// make certain you have a valid min/max temp
 							if let maxT = pastCast.maxTemp, let minT = pastCast.minTemp {
 								Image(systemName: "thermometer.variable.and.figure")
 									.font(.footnote)
+									.goRight()
 
 								Spacer()
 
@@ -89,15 +96,17 @@ struct WorkoutMetricsView: View {
 									.font(.system(size: 8))
 
 							} else {
+
 								Text("loading")
-									.font(.system(size: 9))
-							}
+								.font(.system(size: 9))					}
 						}
 						.font(.footnote)
 
+							// MARK: -> Distance
 						HStack(alignment: .bottom, spacing: 0) {
 							Image(systemName: "figure.run.square.stack")
 								.font(.footnote)
+								//						.goRight()
 
 							Spacer()
 
@@ -109,13 +118,13 @@ struct WorkoutMetricsView: View {
 					}
 					.onAppear {
 						Task {
-								// Fetches past weather conditions for the workout asynchronously.
+								//							isLoading = true // turn on the LoadingView
 							await weatherKit.fetchPastCast(forWhere: weatherKit.convertToCLLocation(thisCoords),
 																	 forWhenStart: thisWorkoutData.workoutDate,
 																	 forWhenEnd: thisWorkoutData.workoutEndDate,
 																	 pastCast: pastCast)
 
-							isLoading = false // Disables the loading view once data has been fetched.
+							isLoading = false // turn the loading page off
 						}
 					}
 					.frame(width: UIScreen.main.bounds.width * 0.3, alignment: .trailing)
@@ -126,13 +135,10 @@ struct WorkoutMetricsView: View {
 				.foregroundColor(.white)
 				.cornerRadius(8)
 				.shadow(color: .gray, radius: 5, x: 0, y: 2)
-					// Styling applied to the entire metrics display, including background, foreground colors, corner radius, and shadow.
 			}
 		}
 	}
 
-		/// DateFormatter to format the workoutDate for display.
-		/// - Returns: A configured DateFormatter for medium date style.
 	private var dateFormatter: DateFormatter {
 		let formatter = DateFormatter()
 		formatter.dateStyle = .medium

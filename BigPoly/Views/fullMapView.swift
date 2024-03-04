@@ -1,24 +1,19 @@
 	//   fullMapView.swift
-	//   BigPoly
 	//
 	//   Created by: Grant Perry on 2/8/24 at 9:56 AM
-	//     Modified: Sunday March 3, 2024 at 11:27:13 AM
-	//
+	//     Modified: Monday March 4, 2024 at 4:49:26 PM
 	//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
-	//
 
 import SwiftUI
 import MapKit
 import HealthKit
 import UIKit
 
-	/// This is the full map view when the NavigationLink on the list view from WorkoutRouteView is selected
+	/// This is the full map view called from NavigationLink on the list view from WorkoutRouteView is selected
 
 struct FullMapView: View {
-
 	@State var thisWorkoutData: WorkoutData
 	@State var showLoading: Bool // force open/close the LoadingView()
-
 	@State var isAvail = false // for lookAround scene
 	@State var workoutCore = WorkoutCore.shared
 	let gradient = LinearGradient(colors: [.gpPink, .gpYellow, .gpGreen], startPoint: .leading, endPoint: .trailing)
@@ -26,16 +21,16 @@ struct FullMapView: View {
 
 	var body: some View {
 
-			//	MARK: Full Map View with polyLine overlay of workout
+			//	MARK: - Full Map View with polyLine overlay of workout
 
-		// unwrap the first and last coords
-		if	let fCoord = thisWorkoutData.workoutCoords?.first!, let lCoord = thisWorkoutData.workoutCoords?.last! {
+			// unwrap the first and last coords
+		if	let firstCoords = thisWorkoutData.workoutCoords?.first!, let lastCoords = thisWorkoutData.workoutCoords?.last! {
 			Map {
 				MapPolyline(coordinates: thisWorkoutData.workoutCoords!)
 					.stroke(gradient, style: stroke)
 
 				Annotation(
-					"Start", coordinate: fCoord, anchor: .bottom) {
+					"Start", coordinate: firstCoords, anchor: .bottom) {
 
 						Image(systemName: "figure.walk.departure")
 							.imageScale(.small)
@@ -44,16 +39,18 @@ struct FullMapView: View {
 							.background(Color.gpGreen)
 							.cornerRadius(4)
 					}
-				Annotation(
-					"End", coordinate: lCoord, anchor: .bottom) {
 
-																				Image(systemName: "figure.walk.arrival")
-																					.imageScale(.small)
-																					.padding(4)
-																					.foregroundStyle(.white)
-																					.background(Color.gpRed)
-																					.cornerRadius(4)
-																			}
+				Annotation(
+					"End", coordinate: lastCoords, anchor: .bottom) {
+
+						Image(systemName: "figure.walk.arrival")
+							.imageScale(.small)
+							.padding(4)
+							.foregroundStyle(.white)
+							.background(Color.gpRed)
+							.cornerRadius(4)
+					}
+
 					//			Marker("Start", coordinate: startWorkout)
 			}
 			.onAppear {
@@ -65,16 +62,11 @@ struct FullMapView: View {
 					if let thisCoord = thisWorkoutData.workoutCoords?.first {
 						isAvail = await isLookAroundAvailable(for: thisCoord)
 						print("lookAround Status: \(isAvail)")
-
 					}
-					print("showLoading NOW = \(showLoading)")
-
+					print("[fullMapView-onAppear] showLoading NOW = \(showLoading)")
 				}
 				workoutCore.fullMapLoading = false // close the loading window
 				showLoading = false
-				print("lookAround Status NOW: \(isAvail)")
-				print("showLoading Status after async load NOW: \(isAvail)\n")
-
 			}
 			.font(.footnote)
 			.mapControlVisibility(.visible)
@@ -84,10 +76,10 @@ struct FullMapView: View {
 				MapCompass()
 				MapUserLocationButton()
 				MapScaleView()
-
 			}
 
-				// MARK: Top Blue safeArea for the metrics display
+ // MARK: Top blue card .safeArea for the metrics display
+
 			.safeAreaInset(edge: .top) {
 				let thisTitle = String("\(thisWorkoutData.workoutAddress?.address ?? "Details for") Walk")
 				WorkoutMetricsView(thisWorkoutData: thisWorkoutData,
@@ -101,7 +93,7 @@ struct FullMapView: View {
 				.mapStyle(.imagery(elevation: .realistic))
 				.background(.clear)
 			}
-				// MARK: -> LookAround view
+ // MARK: -> LookAround view .safeArea
 			.safeAreaInset(edge: .bottom) {
 				HStack {
 					Spacer()
@@ -123,16 +115,17 @@ struct FullMapView: View {
 	}
 }
 
-// determine if a valid lookAround is available for the coordinate
+	// determine if a valid lookAround is available for the coordinate
 func isLookAroundAvailable(for thisCoords: CLLocationCoordinate2D) async -> Bool {
 	do {
 		let thisScene = try await MKLookAroundSceneRequest(coordinate: thisCoords).scene
 		return thisScene != nil
 	} catch {
-		//			retScene = "NOT VALID"
+			//			retScene = "NOT VALID"
 		return false
 	}
 }
+
 
 
 

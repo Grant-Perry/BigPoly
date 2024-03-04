@@ -10,7 +10,7 @@
 import SwiftUI
 import CoreLocation
 
-// model utilized by the fullMapView to create identifiable coordinats 
+// model utilized by the fullMapView to create identifiable coordinates
 struct IdentifiableCoordinate: Identifiable {
 	let id = UUID() // Unique identifier required by Identifiable
 	let coordinate: CLLocationCoordinate2D
