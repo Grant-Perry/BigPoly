@@ -246,6 +246,7 @@ class WorkoutCore {
 		let location = CLLocation(latitude: latitude, longitude: longitude)
 			// Prepares a variable to store the result.
 		var address: Address?
+		//		var workoutData: WorkoutData
 
 		do {
 				// Performs the reverse geocoding operation.
@@ -270,6 +271,74 @@ class WorkoutCore {
 			// Returns the constructed Address object, or nil if the operation failed.
 		return address
 	}
+
+	// fetch directions - return and MKRoute with directions
+	func fetchRouteFrom(from source: CLLocationCoordinate2D,
+							  to destination: CLLocationCoordinate2D) async -> MKRoute {
+
+		var thisRoute: MKRoute?
+		//  var travelTime: String?
+		let request = MKDirections.Request()
+		request.transportType = .automobile //.walking
+
+		request.source = MKMapItem(placemark: MKPlacemark(coordinate: source))
+		request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+		request.transportType = .automobile
+
+		let result = try? await MKDirections(request: request).calculate()
+		thisRoute = result?.routes.first
+		return thisRoute!
+
+	}
+
+
+
+
+
+
+
+	// fetches the last limit workouts - used in GENESIS process
+	//	func fetchLastWorkouts(limit: Int) async throws -> [HKWorkout] {
+	//		let predicate = HKQuery.predicateForWorkouts(with: .walking)
+	//		let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+	//
+	//		// Fetch all workouts first
+	//		let allWorkouts: [HKWorkout] = try await withCheckedThrowingContinuation { continuation in
+	//			let query = HKSampleQuery(sampleType: HKObjectType.workoutType(),
+	//											  predicate: predicate,
+	//											  limit: limit,
+	//											  sortDescriptors: [sortDescriptor]) { _, result, error in
+	//				if let error = error {
+	//					continuation.resume(throwing: error)
+	//				} else if let workouts = result as? [HKWorkout] {
+	//					continuation.resume(returning: workouts)
+	//				} else {
+	//					continuation.resume(returning: [])
+	//				}
+	//			}
+	//			self.healthStore.execute(query)
+	//		}
+	//
+	//		// Filter workouts that have route data with valid coordinates
+	//		var workoutsWithValidCoordinates: [HKWorkout] = []
+	//		for workout in allWorkouts {
+	//			// Fetch routes for each workout
+	//			if let routes = await getWorkoutRoute(workout: workout), !routes.isEmpty {
+	//				// Check for valid coordinates in each route
+	//				for route in routes {
+	//					let locations = await getCLocationDataForRoute(routeToExtract: route)
+	//					if locations.contains(where: { $0.coordinate.latitude != 0 && $0.coordinate.longitude != 0 }) {
+	//						workoutsWithValidCoordinates.append(workout)
+	//						break // Found valid coordinates, no need to check further routes
+	//					}
+	//				}
+	//			}
+	//		}
+	//
+	//		return workoutsWithValidCoordinates
+	//	}
+
+	/// returns the [CLLocationCoordinate2D] - coordinates from the passed HKWorkout
 
 		/// `getWorkoutCoords
 		/// Asynchronously fetches the geographical coordinates from the routes of a specified workout.
@@ -374,6 +443,7 @@ class WorkoutCore {
 					continuation.resume(returning: routes)
 						// Ensures the continuation is always resumed to avoid hanging, even if no routes are found.
 				} else {
+					// It's crucial to resume the continuation even if no routes are found to avoid hanging.
 					continuation.resume(returning: [])
 				}
 			}

@@ -20,7 +20,6 @@ struct LocationPreviewLookAroundView_Orig: View {
 			.overlay(alignment: .bottomTrailing) {
 				HStack {
 					Text("\(selectedResult.name) - \(retScene)")
-
 				}
 				.font(.caption)
 				.foregroundStyle(.white)

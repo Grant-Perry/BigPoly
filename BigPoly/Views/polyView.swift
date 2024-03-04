@@ -34,9 +34,11 @@ struct PolyView: View {
 						NavigationLink(destination: FullMapView(thisWorkoutData: listWorkoutData, showLoading: true)
 							.onAppear {
 								workoutCore.fullMapLoading = false
-							}) {
+							}) 
+						 {
 								WorkoutRouteView(workoutData: listWorkoutData)
 							}
+						
 //							.simultaneousGesture(TapGesture().onEnded {
 //								workoutCore.fullMapLoading = true
 //							} )

@@ -1,11 +1,11 @@
-	//   LookAroundView.swift
-	//   BigPoly
-	//
-	//   Created by: Grant Perry on 3/1/24 at 2:17 PM
-	//     Modified:
-	//
-	//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
-	//
+//   LookAroundView.swift
+//   BigPoly
+//
+//   Created by: Grant Perry on 3/1/24 at 2:17 PM
+//     Modified:
+//
+//  Copyright © 2024 Delicious Studios, LLC. - Grant Perry
+//
 import SwiftUI
 import MapKit
 
@@ -37,19 +37,26 @@ struct LocationPreviewLookAroundView: View {
 								allowsNavigation: true,
 								showsRoadLabels: true,
 								pointsOfInterest: .all)
+		
 		.overlay(alignment: .bottomTrailing) {
 			HStack {
 					// Displays the city name from workout data or "Loading..." if not available.
 				Text("\(workoutData.workoutAddress?.city ?? "Loading...")")
+				//				Text("\(holdCoord)")
+				//					.font(.system(size: 12))
 			}
 			.font(.caption)
 			.foregroundStyle(.white)
 			.padding(18)
 		}
+
 		.onAppear {
 				// Fetches the Look Around scene when the view appears.
 			getLookAroundScene()
 		}
+		//		.onChange(of: selectedResult) {
+		//			getLookAroundScene()
+		//		}
 	}
 
 		/// Fetches a Look Around scene for the last coordinate in `workoutData`.
