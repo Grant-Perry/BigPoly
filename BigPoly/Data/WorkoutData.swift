@@ -14,7 +14,7 @@ import MapKit
 import Observation
 
 @Observable
-class WorkoutData {
+class WorkoutData: Equatable {
 
 	let id = UUID()
 	let workout: HKWorkout
@@ -35,6 +35,9 @@ class WorkoutData {
 		self.workoutPoly = workoutPoly
 	}
 
+	static func == (lhs: WorkoutData, rhs: WorkoutData) -> Bool {
+		return lhs.id == rhs.id
+	}
 
 
 }

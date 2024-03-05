@@ -85,12 +85,12 @@ struct WorkoutMetricsView: View {
 
 								Spacer()
 
-								Text(String(Int((weatherKit.celToFah(minT)))))
+								Text(String(Int((weatherKit.cTOf(minT)))))
 									.font(.footnote) +
 
 								Text(" L")
 									.font(.system(size: 8))
-								Text(String(Int((weatherKit.celToFah(maxT)))))
+								Text(String(Int((weatherKit.cTOf(maxT)))))
 									.font(.footnote) +
 								Text(" H")
 									.font(.system(size: 8))

@@ -505,8 +505,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BigPoly/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "Need to access your locaiton for map view";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Need access to display route correctly on map";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Need access to display route correctly on map";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Need access to your locaiton for map view";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -538,8 +540,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BigPoly/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "Need to access your locaiton for map view";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Need access to display route correctly on map";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Need access to display route correctly on map";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Need access to your locaiton for map view";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

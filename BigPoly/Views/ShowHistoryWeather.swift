@@ -48,10 +48,10 @@ struct HistoryCastView: View {
 				Text("Condition: \(condition)")
 			}
 			if let minTemp = pastCast.minTemp {
-				Text("Min Temp: \(weatherKit.celToFah(minTemp))")
+				Text("Min Temp: \(weatherKit.cTOf(minTemp))")
 			}
 			if let maxTemp = pastCast.maxTemp {
-				Text("Max Temp: \(weatherKit.celToFah(maxTemp))")
+				Text("Max Temp: \(weatherKit.cTOf(maxTemp))")
 			}
 			if let windSpeed = pastCast.windSpeed {
 				Text("Wind Speed: \(windSpeed)")

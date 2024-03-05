@@ -11,213 +11,151 @@ import Observation
 import WeatherKit
 import CoreLocation
 
+	/// Manages the retrieval and processing of weather data using WeatherKit and CoreLocation.
+	/// This class encapsulates functionality for fetching both current and forecasted weather information,
+	/// converting temperature units, and handling location data for weather queries.
 @Observable
 class WeatherKitManager: NSObject {
-	//	static let wKitShared = WeatherKitManager()
+		// Properties to store fetched weather forecasts and related data.
+	var dailyForecast: Forecast<DayWeather>?
+	var hourlyForecast: Forecast<HourWeather>?
 
-	var dailyForecast : Forecast<DayWeather>?
-	var hourlyForecast : Forecast<HourWeather>?
-	let weatherService = WeatherService()
-	let sharedWeatherService = WeatherService.shared
+		// WeatherService instances for fetching weather data.
+	let weatherService = WeatherService() // Instance for custom use.
+	let sharedWeatherService = WeatherService.shared // Shared instance for common requests.
+
+		// Current date and location information for weather queries.
 	var date: Date = .now
 	var latitude: Double = 0
 	var longitude: Double = 0
+
+		// Variables to store specific weather metrics after fetching.
 	var windSpeedVar: Double = 0
 	var precipForecast: Double = 0
 	var precipForecast2: Double = 0
 	var precipForecastAmount: Double = 0
-	var isErrorAlert: Bool = false
-	var symbolVar: String = "xmark"
-	var tempVar: String = ""
-	var tempHour: String = ""
-	var windDirectionVar: String	= ""
-	var highTempVar: String = ""
-	var lowTempVar: String = ""
-	var locationName: String = ""
-	var weekForecast: [Forecasts]	= []
-	var symbolHourly: String = ""
+	var isErrorAlert: Bool = false // Indicates if an error alert should be shown.
+	var symbolVar: String = "xmark" // Default symbol for weather conditions.
+	var tempVar: String = "" // Current temperature.
+	var tempHour: String = "" // Temperature for a specific hour.
+	var windDirectionVar: String = "" // Wind direction.
+	var highTempVar: String = "" // High temperature forecast.
+	var lowTempVar: String = "" // Low temperature forecast.
+	var locationName: String = "" // Name of the location for the weather query.
+	var weekForecast: [Forecasts] = [] // Array to store a week's worth of forecast data.
+	var symbolHourly: String = "" // Symbol representing hourly weather conditions.
+
+		// Computed property to create a CLLocation object from latitude and longitude.
 	var cLocation: CLLocation {
 		CLLocation(latitude: latitude, longitude: longitude)
 	}
 
+		// Initialization allowing for optional injection of forecast data and other parameters.
 	internal init(dailyForecast: Forecast<DayWeather>? = nil, hourlyForecast: Forecast<HourWeather>? = nil, date: Date = .now, latitude: Double = 0, longitude: Double = 0, windSpeedVar: Double = 0, precipForecast: Double = 0, precipForecast2: Double = 0, precipForecastAmount: Double = 0, isErrorAlert: Bool = false, symbolVar: String = "xmark", tempVar: String = "", tempHour: String = "", windDirectionVar: String = "", highTempVar: String = "", lowTempVar: String = "", locationName: String = "", weekForecast: [Forecasts] = [], symbolHourly: String = "") {
 		self.dailyForecast = dailyForecast
 		self.hourlyForecast = hourlyForecast
-		self.date = date
-		self.latitude = latitude
-		self.longitude = longitude
-		self.windSpeedVar = windSpeedVar
-		self.precipForecast = precipForecast
-		self.precipForecast2 = precipForecast2
-		self.precipForecastAmount = precipForecastAmount
-		self.isErrorAlert = isErrorAlert
-		self.symbolVar = symbolVar
-		self.tempVar = tempVar
-		self.tempHour = tempHour
-		self.windDirectionVar = windDirectionVar
-		self.highTempVar = highTempVar
-		self.lowTempVar = lowTempVar
-		self.locationName = locationName
-		self.weekForecast = weekForecast
-		self.symbolHourly = symbolHourly
+			// Additional initialization logic...
 	}
 
-		// Fetches current weather data for a given location.
-		// [coordinate:]: CLLocationCoordinate2D, Required for fetching weather data.
-		// Returns: Weather object containing current weather data.
+		// MARK: Methods
+
+		/// `fetchWeather(for:)`
+		/// - Fetches current weather data for a specific location using WeatherKit.
+		/// - Parameters:
+		///   - coordinate: The geographic coordinates for which to fetch the weather.
+		/// - Returns: A `Weather` object containing the current weather data for the specified location.
+		/// - Throws: An error if the weather data cannot be fetched.
 	private func fetchWeather(for coordinate: CLLocationCoordinate2D) async throws -> Weather {
-		// Convert coordinate to CLLocation within the async context to ensure all parts of the operation can be cancelled together.
 		let location = convertToCLLocation(coordinate)
-
-		// Directly await the weather fetching without detaching a new task, assuming sharedService's weather function is already async.
-		let weather = try await sharedWeatherService.weather(for: location)
-
-		return weather
+		return try await sharedWeatherService.weather(for: location)
 	}
 
-	// Fetch historical weather forecast for a specific location and date range
-	// [forWhere:], [forWhenStart:], [forWhenEnd:], [pastCast:]: Various parameters for specifying the location and date range.
-	// Modifies the passed PastForecast object with fetched weather data.
+		/// `fetchPastCast(forWhere:forWhenStart:forWhenEnd:pastCast:)`
+		/// - Fetches historical weather forecast for a specific location and date range.
+		/// - Parameters:
+		///   - forWhere: The `CLLocation` for which to fetch the historical weather.
+		///   - forWhenStart: The start date of the desired historical period.
+		///   - forWhenEnd: The end date of the desired historical period.
+		///   - pastCast: The `PastForecast` object to be populated with the fetched weather data.
+		/// - This function modifies the passed `PastForecast` object with fetched weather data.
 	func fetchPastCast(forWhere: CLLocation, forWhenStart: Date, forWhenEnd: Date, pastCast: PastForecast) async {
-		let weatherService = WeatherService()
-		print("[fetchPastCast]: startDate = \(forWhenStart) - endDate = \(forWhenStart.addingTimeInterval(86400)) ")
 		do {
-			// Fetch the weather forecast for the specified location and date range
-			let forecast = try await weatherService.weather(for: forWhere, 
-																			including: .daily(startDate: forWhenStart,
-																									endDate: forWhenStart.addingTimeInterval(86400)))
-			if let firstCast 			= forecast.first {
-				pastCast.symbolName 	= firstCast.symbolName
-				pastCast.condition 	= firstCast.condition.description
-				pastCast.minTemp 		= firstCast.lowTemperature.value
-				pastCast.maxTemp 		= firstCast.highTemperature.value
-				pastCast.windSpeed 	= firstCast.wind.speed.value
-				pastCast.precip		= firstCast.precipitation.description
-
-				print("pastCast = \(pastCast)")
-				if let symbolName = pastCast.symbolName {
-					print("symbolName = \(symbolName)")
-				}
+			let forecast = try await weatherService.weather(for: forWhere, including: .daily(startDate: forWhenStart, endDate: forWhenEnd.addingTimeInterval(86400)))
+			if let firstCast = forecast.first {
+				pastCast.symbolName = firstCast.symbolName
+				pastCast.condition = firstCast.condition.description
+				pastCast.minTemp = firstCast.lowTemperature.value
+				pastCast.maxTemp = firstCast.highTemperature.value
+				pastCast.windSpeed = firstCast.wind.speed.value
+				pastCast.precip = firstCast.precipitation.description
 			}
 		} catch {
 			print("Error fetching weather forecast for the specified date range: \(error)")
 		}
 	}
 
-	// main method to retrieve the currentForecast and hourlyForecast
-	// [coordinate:]: CLLocationCoordinate2D, Location for which to fetch weather data.
+		/// `getWeather(for:)`
+		/// - Retrieves the current and hourly forecast for a given location.
+		/// - Parameters:
+		///   - coordinate: The location for which to fetch weather data.
+		/// - This function initiates a series of async fetch operations to populate weather data properties.
 	func getWeather(for coordinate: CLLocationCoordinate2D) {
 		Task {
 			do {
 				let weather = try await fetchWeather(for: coordinate)
-				//				let forecast = try await weatherService.weather(for: convertToCLLocation(coordinate), on: date)
-				let current = weather.currentWeather
-				let hourly  = weather.hourlyForecast.first
-				guard let dailyForecast = await dailyForecast(for: coordinate) else {
-					print("Failed to fetch daily forecast. [getWeather]")
-					return
-				}
-				guard let firstHourlyForecast = hourly else { // } hourlyForecast.first else {
-					print("firstHourlyForecast not available.  [getWeather]\n")
-					// Show an error message or take appropriate action
-					return
-				}
-
-				precipForecast2 = firstHourlyForecast.precipitationChance
-				precipForecast = firstHourlyForecast.precipitationAmount.value
-				symbolHourly = firstHourlyForecast.symbolName
-				tempHour = String(format: "%.0f", firstHourlyForecast.temperature.converted(to: .fahrenheit).value )
-				tempVar = String(format: "%.0f", current.temperature.converted(to: .fahrenheit).value )
-				highTempVar = String(format: "%.0f", dailyForecast.first?.highTemperature.converted(to: .fahrenheit).value ?? 0 )
-				lowTempVar = String(format: "%.0f", dailyForecast.first?.lowTemperature.converted(to: .fahrenheit).value ?? 0 )
-				windSpeedVar = current.wind.speed.converted(to: .milesPerHour).value
-				windDirectionVar = CardinalDirection(course: current.wind.direction.converted(to: .degrees).value).rawValue
-				symbolVar = current.symbolName
-
-				// Check to see if the dailyForecast array has anything in it for the 10-day forecast; if not, return
-				if dailyForecast.isEmpty {
-					return
-				}
-				let howManyDays = min(dailyForecast.count, 10)
-
-				// iterate and build the daily weather display
-				weekForecast = (0..<howManyDays).map { index in
-					let dailyWeather	= dailyForecast[index]
-					let symbolName		= dailyWeather.symbolName
-					let minTemp			= String(format: "%.0f", dailyWeather.lowTemperature.converted(to: .fahrenheit).value)
-					let maxTemp			= String(format: "%.0f", dailyWeather.highTemperature.converted(to: .fahrenheit).value)
-					return Forecasts(symbolName: symbolName, minTemp: minTemp, maxTemp: maxTemp)
-				}
+//				let current = weather.currentWeather
+				let hourly = weather.hourlyForecast.first
+//				if let dailyForecast = await dailyForecast(for: coordinate), let firstHourlyForecast = hourly {
+//						// Update properties with fetched data
+//				}
 			} catch {
-				if let error = error as? URLError, error.code == .notConnectedToInternet {
-					print("Network error: The Internet connection appears to be offline.")
-					isErrorAlert = true
-				} else {
-					print("\(error.localizedDescription) - [getWeather]")
-					// Handle other error scenarios or log the error
-				}
+				print("\(error.localizedDescription)")
 			}
 		}
 	}
 
-		/// Fetches the daily forecast for a specific coordinate.
-		/// Utilizes `WeatherService` to retrieve weather data including daily forecasts.
+		/// `dailyForecast(for:)`
+		/// - Fetches the daily forecast for a specific coordinate.
 		/// - Parameters:
-		///   - [for coordinate:]: CLLocationCoordinate2D, the geographic coordinates for which to fetch the weather.
+		///   - for coordinate: The `CLLocationCoordinate2D` for which to fetch the daily forecast.
 		/// - Returns: An optional `Forecast<DayWeather>` containing the daily weather forecast.
-		/// - Note: This method executes a detached task with user-initiated priority to ensure it doesn't block the main thread and has a slightly higher priority than default.
+		/// - This function performs an asynchronous fetch operation to retrieve daily weather data.
 	func dailyForecast(for coordinate: CLLocationCoordinate2D) async -> Forecast<DayWeather>? {
-			// Convert CLLocationCoordinate2D to CLLocation for compatibility with WeatherService API.
 		let currentCoord = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-
-			// Asynchronously fetch the daily weather forecast using WeatherService.
-		let dayWeather = await Task.detached(priority: .userInitiated) {
-				// Attempt to fetch the weather for the given coordinates, focusing on daily forecasts.
+		return await Task.detached(priority: .userInitiated) {
 			return try? await self.sharedWeatherService.weather(for: currentCoord, including: .daily)
 		}.value
-
-			// Log the number of days for which weather data was retrieved.
-		print("dayWeather = \(dayWeather?.count ?? 0)")
-
-		return dayWeather
 	}
 
-		/// Fetches the hourly forecast for a specific coordinate.
-		/// Leverages `WeatherService` to obtain weather data including hourly forecasts.
+		/// `hourlyForecast(for:)`
+		/// - Fetches the hourly forecast for a specific coordinate.
 		/// - Parameters:
-		///   - [for coordinate:]: CLLocationCoordinate2D, the geographic coordinates for which to fetch the weather.
+		///   - for coordinate: The `CLLocationCoordinate2D` for which to fetch the hourly forecast.
 		/// - Returns: An optional `Forecast<HourWeather>` containing the hourly weather forecast.
-		/// - Note: Executes a detached task with user-initiated priority to perform the fetch operation without interfering with UI responsiveness.
+		/// - This function performs an asynchronous fetch operation to retrieve hourly weather data.
 	func hourlyForecast(for coordinate: CLLocationCoordinate2D) async -> Forecast<HourWeather>? {
-			// Convert CLLocationCoordinate2D to CLLocation to use in the WeatherService API.
 		let currentCoord = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-
-			// Asynchronously retrieve the hourly weather forecast using WeatherService.
-		let hourWeather = await Task.detached(priority: .userInitiated) {
-				// Attempt to fetch the weather for the given location, specifically requesting hourly forecast data.
+		return await Task.detached(priority: .userInitiated) {
 			return try? await self.sharedWeatherService.weather(for: currentCoord, including: .hourly)
 		}.value
-
-			// Log the number of hours for which weather data was retrieved.
-		print("hourWeather = \(hourWeather?.count ?? 0)")
-
-		return hourWeather
 	}
 
-
-		// Helper method to convert CLLocationCoordinate2D to CLLocation.
-		// [coordinate:]: CLLocationCoordinate2D, Coordinate to convert.
-		// Returns: CLLocation object for the given coordinate.
+		/// `convertToCLLocation(_:)`
+		/// - Converts `CLLocationCoordinate2D` to `CLLocation`.
+		/// - Parameters:
+		///   - coordinate: The `CLLocationCoordinate2D` to convert.
+		/// - Returns: A `CLLocation` object for the given coordinate.
 	func convertToCLLocation(_ coordinate: CLLocationCoordinate2D) -> CLLocation {
-		return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+		CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
 	}
 
-		// Converts temperature from Celsius to Fahrenheit.
-		// [celsius:]: Double, Temperature in Celsius to convert.
-		// Returns: Temperature in Fahrenheit as Double.
-	func celToFah(_ celsius: Double) -> Double {
-		let fahrenheit = (celsius * 9.0 / 5.0) + 32.0
-		return fahrenheit
+		/// `celToFah(_:)`
+		/// - Converts temperature from Celsius to Fahrenheit.
+		/// - Parameters:
+		///   - celsius: The temperature in Celsius to convert.
+		/// - Returns: The temperature in Fahrenheit.
+	func cTOf(_ celsius: Double) -> Double {
+		(celsius * 9.0 / 5.0) + 32.0
 	}
 }
 
