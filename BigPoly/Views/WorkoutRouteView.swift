@@ -13,6 +13,29 @@ import CoreLocation
 import MapKit
 import HealthKit
 
+
+/// ``WorkoutRouteView
+/// A SwiftUI view designed to display detailed information about a workout including its route on a map.
+/// It displays the workout date, address, distance, and a map snapshot of the workout's location.
+/// Uses `@State` properties to manage dynamic data such as workout details and loading states.
+/// The view is divided into two main sections: an address container and a map container.
+/// - The address container shows the workout's date, address, and distance.
+/// - The map container displays a map view centered on the workout's location.
+/// - Parameters:
+///     - `workoutData`: The data of the workout to display.
+///     - `address`: The address of the workout location.
+///     - `thisWorkoutDistance`: The distance covered in the workout.
+///     - `date`: The date of the workout.
+///     - `latitude`, `longitude`: Coordinates for the workout's location.
+///     - `isLoading`: A boolean to manage the loading state of the view.
+///     - `locations`: An array of `CLLocation` representing the workout route.
+///     - `position`: The camera position for the map view.
+///     - `region`: The map region to be displayed.
+///     - `boxHeight`: The height of the container boxes.
+///
+/// The body contains a `VStack` with conditional rendering based on `isLoading`. The address container is displayed when not loading, 
+/// and a progress view is shown during loading. The map container displays the map or a placeholder text if no map data is available.
+
 struct WorkoutRouteView: View {
 	//	@State var workout: HKWorkout
 	@State var workoutData: WorkoutData

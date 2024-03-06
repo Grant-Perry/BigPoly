@@ -10,7 +10,7 @@
 import SwiftUI
 import MapKit
 
-	/// A view that calculates and displays a route between two points on a map, along with the travel time.
+	/// Calculate and displays a route between two points on a map, along with the travel time.
 struct RouteView: View {
 		// MARK: - State Properties
 	@State private var route: MKRoute? // The route to be displayed.

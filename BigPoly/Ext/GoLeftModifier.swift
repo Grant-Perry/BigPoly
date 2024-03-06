@@ -9,7 +9,9 @@
 
 import SwiftUI
 
-// Top justification
+/// ``GoTopModifier``
+/// A view modifier to align content at the top of a container.
+/// This modifier wraps the content within a `VStack` and pushes it to the top, leaving flexible space below.
 struct GoTopModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		VStack {
@@ -19,7 +21,9 @@ struct GoTopModifier: ViewModifier {
 	}
 }
 
-// Bottom justification
+/// ``GoBottomModifier``
+/// A view modifier for aligning content at the bottom of a container.
+/// This wraps the content within a `VStack`, positioning it at the bottom with flexible space above.
 struct GoBottomModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		VStack {
@@ -29,7 +33,9 @@ struct GoBottomModifier: ViewModifier {
 	}
 }
 
-// left justification
+/// ``GoLeftModifier``
+/// A view modifier to align content to the left side of a container.
+/// It employs an `HStack` to position the content on the left, with a `Spacer` pushing it against the container's edge.
 struct GoLeftModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		HStack {
@@ -39,6 +45,9 @@ struct GoLeftModifier: ViewModifier {
 	}
 }
 
+/// ``GoRightModifier``
+/// A modifier for positioning content to the right within a container.
+/// This utilizes an `HStack` with a `Spacer` on the left, moving the content to the right edge.
 struct GoRightModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		HStack {
@@ -48,33 +57,38 @@ struct GoRightModifier: ViewModifier {
 	}
 }
 
-// Extension to apply the .goLeft modifier
+/// Extension for `View` to apply ``goLeft`` modifier.
+/// Enables left alignment of content within a view by applying `GoLeftModifier`.
 extension View {
 	func goLeft() -> some View {
 		self.modifier(GoLeftModifier())
 	}
 }
 
-// Extension to apply the .goRight modifier
+/// Extension for `View` to use ``goRight`` modifier.
+/// Allows for right-justifying content within a view through `GoRightModifier`.
 extension View {
 	func goRight() -> some View {
 		self.modifier(GoRightModifier())
 	}
 }
 
-// Extension to apply the .goTop modifier
+/// Extension to apply ``goTop`` modifier on a view.
+/// This facilitates top alignment of content by leveraging `GoTopModifier`.
 extension View {
 	func goTop() -> some View {
 		self.modifier(GoTopModifier())
 	}
 }
 
-// Extension to apply the .goBottom modifier
+/// Extension for applying ``goBottom`` modifier to a view.
+/// It aids in bottom-aligning content by utilizing `GoBottomModifier`.
 extension View {
 	func goBottom() -> some View {
 		self.modifier(GoBottomModifier())
 	}
 }
+
 
 
 

@@ -11,6 +11,22 @@ import SwiftUI
 import HealthKit
 import MapKit
 
+/// ``PolyView``
+/// A comprehensive SwiftUI view that displays a list of workouts, allows for date range adjustments, and shows workouts on a map.
+/// Utilizes `@State` properties to manage UI state, including loading states and pagination.
+/// Incorporates `WorkoutCore` for workout data fetching and integrates a custom `DatePickerView` for selecting date ranges.
+/// - Properties:
+///     - `workoutData`: An array of `WorkoutData` to display.
+///     - `isLoading`: A boolean indicating if the initial data load is in progress.
+///     - `isLoadingMore`: Indicates whether additional data is being loaded (pagination).
+///     - `hasMoreData`: Controls if more data can be loaded based on the availability of data.
+///     - `workoutCore`: An instance of `WorkoutCore` for accessing workout data.
+///     - `workoutLimit`: The maximum number of workouts to fetch per request. Set to a minimum of 50.
+///     - `showDatePicker`: Controls the visibility of the date picker overlay.
+///     - `startDate`, `endDate`: Define the date range for workout data fetching.
+///     - `region`: An `MKCoordinateRegion` defining the initial map view.
+///
+/// The view structure includes a `NavigationStack` with a list of workouts, a button for changing date filters, and an overlay for loading states.
 struct PolyView: View {
 	@State private var workoutData: [WorkoutData] = []
 	@State var isLoading = true
@@ -21,9 +37,8 @@ struct PolyView: View {
 	@State private var showDatePicker = false
 	@State private var startDate = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date().addingTimeInterval(-3600 * 30)
 	@State private var endDate = Date()
-	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), 
+	@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
 										   span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
-
 	var body: some View {
 		NavigationStack {
 			VStack(spacing: 0) {
@@ -53,7 +68,7 @@ struct PolyView: View {
 			}
 			.navigationTitle("Gp. Workouts")
 		}
-			// put up the Loading modal if necessary
+		// put up the Loading modal if necessary
 		.overlay(
 			isLoading ?
 			Color.black.opacity(0.75) // Semi-transparent background
@@ -83,15 +98,20 @@ struct PolyView: View {
 		}
 		.sheet(isPresented: $showDatePicker) {
 			DatePickerView(startDate: $startDate,
-								endDate: $endDate,
-								workoutLimit: $workoutLimit,
-								isLoading: $isLoading,
-								onSubmit: {
+						   endDate: $endDate,
+						   workoutLimit: $workoutLimit,
+						   isLoading: $isLoading,
+						   onSubmit: {
 				Task { await loadWorkouts(resetData: true) }
 			})
 		}
 		.background(.blue.gradient)
 	}
+}
+
+// MARK: - Helpers
+
+extension PolyView {
 
 	/// ``loadWorkouts(resetData:)``
 	/// Invoked within WorkoutRouteView to asynchronously fetch and load workout data, possibly resetting existing data.
@@ -133,7 +153,8 @@ struct PolyView: View {
 
 	/// ``loadMoreWorkouts()`
 	/// Triggers the asynchronous loading of additional workouts, if not currently loading and more data is available.
-	/// - This function checks if more workouts are available and if it's not currently in the process of loading more. It then proceeds to asynchronously fetch more workout data, updating the UI upon completion. This allows for incremental data loading, enhancing user experience in data-rich applications.
+	/// - This function checks if more workouts are available and if it's not currently in the process of loading more. It then proceeds to asynchronously 
+	/// fetch more workout data, updating the UI upon completion. This allows for incremental data loading, enhancing user experience in data-rich applications.
 	private func loadMoreWorkouts() {
 		guard !isLoadingMore && hasMoreData else { return } // Check if able to load more
 		isLoadingMore = true // Mark the beginning of loading more data

@@ -34,16 +34,13 @@
 		9B5269E62B7928C300695BA6 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269E52B7928C300695BA6 /* Address.swift */; };
 		9B5269EC2B7AC1BF00695BA6 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269EB2B7AC1BF00695BA6 /* DateExt.swift */; };
 		9B5269EE2B7C027D00695BA6 /* WorkoutRouteEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269ED2B7C027D00695BA6 /* WorkoutRouteEXT.swift */; };
-		9B5269F02B7D1F2400695BA6 /* PaginatedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269EF2B7D1F2400695BA6 /* PaginatedWorkoutView.swift */; };
 		9B5269F22B7D201F00695BA6 /* HKActivityTypeEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F12B7D201F00695BA6 /* HKActivityTypeEXT.swift */; };
 		9B5269F42B7D28BE00695BA6 /* SortingFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F32B7D28BE00695BA6 /* SortingFilteringView.swift */; };
 		9B5269F62B7D2DF100695BA6 /* WorkoutMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F52B7D2DF100695BA6 /* WorkoutMetricsView.swift */; };
 		9B5269F82B7D351B00695BA6 /* fullMapMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5269F72B7D351B00695BA6 /* fullMapMetricsView.swift */; };
 		9BADEF292B814390009012F7 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADEF282B814390009012F7 /* WorkoutData.swift */; };
 		9BBBBC822B853AD500D78C5D /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC812B853AD500D78C5D /* DatePickerView.swift */; };
-		9BBBBC842B854FFB00D78C5D /* MapStyleSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC832B854FFB00D78C5D /* MapStyleSelectorView.swift */; };
 		9BBBBC862B85528D00D78C5D /* MapStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC852B85528D00D78C5D /* MapStyle.swift */; };
-		9BBBBC892B89542400D78C5D /* HistoricalWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBBC882B89542400D78C5D /* HistoricalWeather.swift */; };
 		9BDA99A32B925D9E0088C59C /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A22B925D9E0088C59C /* RouteView.swift */; };
 		9BDA99A52B9260270088C59C /* NewYorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A42B9260270088C59C /* NewYorkView.swift */; };
 		9BDA99A72B92612F0088C59C /* LocationPreviewLookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA99A62B92612F0088C59C /* LocationPreviewLookAroundView.swift */; };
@@ -84,16 +81,13 @@
 		9B5269E52B7928C300695BA6 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		9B5269EB2B7AC1BF00695BA6 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		9B5269ED2B7C027D00695BA6 /* WorkoutRouteEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRouteEXT.swift; sourceTree = "<group>"; };
-		9B5269EF2B7D1F2400695BA6 /* PaginatedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedWorkoutView.swift; sourceTree = "<group>"; };
 		9B5269F12B7D201F00695BA6 /* HKActivityTypeEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKActivityTypeEXT.swift; sourceTree = "<group>"; };
 		9B5269F32B7D28BE00695BA6 /* SortingFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingFilteringView.swift; sourceTree = "<group>"; };
 		9B5269F52B7D2DF100695BA6 /* WorkoutMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutMetricsView.swift; sourceTree = "<group>"; };
 		9B5269F72B7D351B00695BA6 /* fullMapMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fullMapMetricsView.swift; sourceTree = "<group>"; };
 		9BADEF282B814390009012F7 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
 		9BBBBC812B853AD500D78C5D /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		9BBBBC832B854FFB00D78C5D /* MapStyleSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleSelectorView.swift; sourceTree = "<group>"; };
 		9BBBBC852B85528D00D78C5D /* MapStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyle.swift; sourceTree = "<group>"; };
-		9BBBBC882B89542400D78C5D /* HistoricalWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalWeather.swift; sourceTree = "<group>"; };
 		9BDA99A22B925D9E0088C59C /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		9BDA99A42B9260270088C59C /* NewYorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewYorkView.swift; sourceTree = "<group>"; };
 		9BDA99A62B92612F0088C59C /* LocationPreviewLookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewLookAroundView.swift; sourceTree = "<group>"; };
@@ -182,8 +176,6 @@
 				9B5269F72B7D351B00695BA6 /* fullMapMetricsView.swift */,
 				9B46433F2B75233000833432 /* fullMapView.swift */,
 				9B46433D2B7522DE00833432 /* LoadingView.swift */,
-				9BBBBC832B854FFB00D78C5D /* MapStyleSelectorView.swift */,
-				9B5269EF2B7D1F2400695BA6 /* PaginatedWorkoutView.swift */,
 				9B4643382B751C1D00833432 /* polyView.swift */,
 				9B5269F32B7D28BE00695BA6 /* SortingFilteringView.swift */,
 				9B5269F52B7D2DF100695BA6 /* WorkoutMetricsView.swift */,
@@ -249,7 +241,6 @@
 		9BBBBC872B89533C00D78C5D /* Structs */ = {
 			isa = PBXGroup;
 			children = (
-				9BBBBC882B89542400D78C5D /* HistoricalWeather.swift */,
 				9BDA99AA2B9266E50088C59C /* MyFavoriteLocation.swift */,
 				9BFF91C42B9648710041AC11 /* gp.swift */,
 			);
@@ -344,16 +335,13 @@
 				9B5269F82B7D351B00695BA6 /* fullMapMetricsView.swift in Sources */,
 				9B4643402B75233000833432 /* fullMapView.swift in Sources */,
 				9B4643422B75239B00833432 /* WorkoutCore.swift in Sources */,
-				9B5269F02B7D1F2400695BA6 /* PaginatedWorkoutView.swift in Sources */,
 				9BADEF292B814390009012F7 /* WorkoutData.swift in Sources */,
 				9B0046C42B8BC18B00EDAA8A /* GoLeftModifier.swift in Sources */,
 				9B155CB72B8A4C870082DA43 /* Forecasts.swift in Sources */,
-				9BBBBC892B89542400D78C5D /* HistoricalWeather.swift in Sources */,
 				9B5269D82B77C40A00695BA6 /* IdentifiableCoordinate.swift in Sources */,
 				9B5269EE2B7C027D00695BA6 /* WorkoutRouteEXT.swift in Sources */,
 				9BBBBC822B853AD500D78C5D /* DatePickerView.swift in Sources */,
 				9B5269DE2B78091900695BA6 /* WorkoutRouteView.swift in Sources */,
-				9BBBBC842B854FFB00D78C5D /* MapStyleSelectorView.swift in Sources */,
 				9B46433C2B751D5100833432 /* CityCoords.swift in Sources */,
 				9BDA99AD2B9397900088C59C /* LocationPreview_Orig.swift in Sources */,
 				9B155CB52B8A4C370082DA43 /* PastForecast.swift in Sources */,
